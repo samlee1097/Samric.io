@@ -1,0 +1,329 @@
+/* Gluten Semi-Bold 600 Font */ /* Might be it!!! */
+@import url('https://fonts.googleapis.com/css2?family=Gluten:wght@500&display=swap');
+
+.App {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#rainbow-title {
+    text-align: center;
+    font-size: 6.5rem;
+    font-family: 'Gluten', cursive;
+
+    padding-top: 1.5rem;
+}
+
+#rainbow-title span {
+    display: inline-block;
+}
+
+#rainbow-title span:nth-child(1) {
+    color: rgb(232, 9, 32);
+    transform: rotate(3deg);
+    -webkit-text-stroke: 3px black;
+    animation: leftToRight 1.25s infinite;
+}
+
+#rainbow-title span:nth-child(2) {
+    color: rgb(242, 103, 10);
+    transform: rotate(-3deg);
+    -webkit-text-stroke: 2px black;
+    animation: rightToLeft 1.25s infinite;
+}
+
+#rainbow-title span:nth-child(3) {
+    color: rgb(243, 255, 23);
+    transform: rotate(3deg);
+    -webkit-text-stroke: 3px black;
+    animation: leftToRight 1.25s infinite;
+}
+
+#rainbow-title span:nth-child(4) {
+    color: rgb(29, 191, 56);
+    transform: rotate(-3deg);
+    -webkit-text-stroke: 2px black;
+    animation: rightToLeft 1.25s infinite;
+}
+
+#rainbow-title span:nth-child(5) {
+    color: rgb(35, 199, 232);
+    transform: rotate(3deg);
+    -webkit-text-stroke: 3px black;
+    animation: leftToRight 1.25s infinite;
+}
+
+#rainbow-title span:nth-child(6) {
+    color: rgb(40, 22, 242);
+    transform: rotate(-3deg);
+    -webkit-text-stroke: 2px black;
+    animation: rightToLeft 1.25s infinite;
+}
+
+#rainbow-title span:nth-child(7) {
+    color: rgb(199, 9, 237);
+    transform: rotate(3deg);
+    -webkit-text-stroke: 3px black;
+    animation: leftToRight 1.25s infinite;
+}
+
+#rainbow-title span:nth-child(8) {
+    color: white;
+    transform: rotate(-3deg);
+    -webkit-text-stroke: 2px black;
+    animation: rightToLeft 1.25s infinite;
+}
+
+#rainbow-title span:nth-child(9) {
+    color: white;
+    transform: rotate(3deg);
+    -webkit-text-stroke: 3px black;
+    animation: leftToRight 1.25s infinite;
+}
+
+#paintbrush {
+    color: black;
+    transform: rotate(-3deg);
+    animation: rightToLeft 1.25s infinite;
+    font-size: 5.5rem;
+}
+
+@keyframes leftToRight {
+    0% {
+        transform: rotate(3deg);
+        -webkit-text-stroke: 3px black;
+    }
+    50% {
+        transform: rotate(-3deg);
+        -webkit-text-stroke: 2px black;
+    }
+    100% {
+        transform: rotate(3deg);
+        -webkit-text-stroke: 3px black;
+    }
+}
+
+@keyframes rightToLeft {
+    0% {
+        transform: rotate(-3deg);
+        -webkit-text-stroke: 2px black;
+    }
+    50% {
+        transform: rotate(3deg);
+        -webkit-text-stroke: 3px black;
+    }
+    100% {
+        transform: rotate(-3deg);
+        -webkit-text-stroke: 2px black;
+    }
+}
+
+#homepage-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    padding: 8px;
+    /* margin-bottom: 8px; */
+}
+
+#character-creation {
+    height: fit-content;
+    width: 500px;
+    padding-bottom: 10px;
+}
+
+.homepage-containers {
+    background: white;
+    border-radius: 3px;
+
+    box-shadow: 0 0 4px 0 rgb(0 0 0 / 50%);
+}
+
+.homepage-containers input {
+    width: 95%;
+    height: 34px;
+
+    margin: 10px;
+    padding: 6px 12px;
+
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: #555;
+    font-size: 14px;
+    text-align: center;
+}
+
+#avatar-selection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#homepage-buttons-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.homepage-button {
+    width: 95%;
+    color: white;
+
+    border: 1px solid transparent;
+    border-radius: 5px;
+    margin-bottom: 0;
+
+    font-weight: 400;
+    user-select: none;
+
+    cursor: pointer;
+}
+
+#play-button {
+    background: rgb(92, 184, 92);
+    border-color: rgb(76, 174, 76);
+
+    padding: 10px 16px;
+    margin-top: 8px;
+
+    font-size: 18px;
+    line-height: 1.333333;
+}
+
+#private-button {
+    background: rgb(91, 192, 222);
+    border-color: rgb(70, 184, 218);
+
+    padding: 6px 12px;
+    margin-top: 4px;
+    font-size: 14px;
+}
+
+#play-button:hover {
+    background: rgb(68, 157, 68);
+}
+
+#private-button:hover {
+    background: rgb(49, 176, 213);
+}
+
+#play-button:active, #private-button:active {
+    box-shadow: inset 0 3px 5px rgb(0 0 0 / 13%);
+    outline: 0;
+    transform: scale(.99);
+}
+
+#play-button:active {
+    background-color: rgb(57, 132, 57);
+    border-color: rgb(57, 132, 57);
+}
+
+#private-button:active {
+    background-color: rgb(38, 154, 188);
+    border-color: rgb(38, 154, 188);
+}
+
+#details-section {
+    margin-top: 8px;
+    padding: 8px;
+    height: fit-content;
+    width: 500px;
+}
+
+#details-section summary {
+    font-size: 24px;
+    font-weight: 700;
+    color: #333;
+
+    cursor: pointer;
+    text-decoration: none;
+    list-style: none;
+}
+
+#details-section summary:hover {
+    color: rgb(57, 132, 57);
+}
+
+#details-section div {
+    font-size: 14px;
+    line-height: 1.35;
+}
+
+#news-update {
+    border-radius: 3px;
+    background-color: rgb(186, 255, 170);
+    border: 1px solid rgb(144, 234, 124);
+    color: #105B00;
+    padding: 5px;
+}
+
+#homepage-footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+footer div {
+    color: rgb(173, 216, 230);
+    font-size: 15px;
+    font-weight: bold;
+}
+
+footer div a {
+    text-decoration: none;
+    color: rgb(173, 216, 230);
+}
+
+footer div a:hover {
+    text-decoration: underline;
+    color: rgb(95, 158, 160);
+}
+
+footer div:nth-child(2) {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+footer div:nth-child(3) {
+    text-align: center;
+    color: rgb(140, 140, 140);
+    font-size: 14px;
+    font-weight: 350;
+}
+
+.skribblio {
+    text-decoration: none;
+    color: rgb(41, 88, 163);
+}
+
+.skribblio:hover {
+    color: rgb(106, 143, 204);
+}
+
+.skribblio:active {
+    color: rgb(41, 88, 163);
+}
+
+#avatar-container {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+
+   background:rgba(190, 190, 190, 0.2);
+   margin-left: 107.5px;
+   margin-right: 107.5px;
+
+   border-radius: 5px;
+}
+
+#avatar-image{
+    width: auto;
+    height: 200px;
+}

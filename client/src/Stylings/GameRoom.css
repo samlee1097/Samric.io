@@ -1,0 +1,222 @@
+.container{
+    margin: 3% auto;
+    width: fit-content;
+    height: fit-content;
+    position: relative;
+}
+
+::selection{
+    background-color: transparent;
+}
+
+.color-icon{
+     width: 25px;
+     height: 25px;
+     float:left;
+     position: relative;
+}
+
+.color-icon:hover{
+    border: 2px black solid;
+    cursor: pointer;
+}
+
+.tool-icon{
+    cursor: pointer;
+    width:33px;
+}
+
+.clicked-tool{
+    background-color: rgb(194, 199, 228);
+    cursor: pointer;
+    width:33px;
+}
+
+#color-grid{
+    width: 335px;
+    margin-right: 10px;
+}
+
+.selected-color{
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    float:left;
+}
+
+#gameroom-player-container{
+    width: 200px;
+    height: 600px;
+    background-color: white;
+}
+
+#gameroom-chatbox{
+    width: 330px;
+    height: 600px;
+    background-color: white;
+}
+
+#gameroom-header{
+    width: 1345px;
+    height: 50px;
+    background-color: white;
+    display: flex;
+    margin-left: 5px;
+}
+
+#showword-div{
+    margin: auto;
+}
+
+#middle-section-gameroom{
+    display: flex;
+    float: left;
+    margin: 7.5px 0px;
+    width: 1350px;
+}
+
+#middle-section-gameroom div{
+    margin: 0 2.5px;
+}
+
+#tool-box{
+    display: flex;
+    width: fit-content;
+    margin: 0 auto;
+    left: -100px;
+    position: relative;
+}
+
+#tool-box > div{
+    margin: 0 3px;
+}
+
+.react-icon-tool{
+    width: 35px;
+    height: 35px;
+}
+
+#trash-icon{
+    border: none;
+    height: 50px;
+    width: 50px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+
+    position: absolute;
+    right: 345px;
+    bottom: 0;
+
+    color: rgb(133, 133, 133);
+}
+
+#trash-icon:hover{
+    transform: scale(1.1);
+    color: red;
+    background: pink;
+    box-shadow: 0 0 8px 1px red;
+}
+
+#trash-icon:active {
+    transform: scale(1.05);
+}
+
+.weight-button{
+    width: 50px;
+    height: 50px;
+    margin: auto 1.5px;
+    cursor: pointer;
+}
+
+.weight-button:active {
+    transform: scale(.95);
+}
+
+#weight-1{
+    width: 4px;
+    height: 4px;
+}
+
+#weight-2{
+    width: 9px;
+    height: 9px;
+    margin: -2px 0;
+}
+
+#weight-3{
+    width: 18px;
+    height: 18px;
+    margin: -6px 0;
+}
+
+#weight-4{
+    width: 30px;
+    height: 30px;
+    margin: -10.5px 0;
+}
+
+#weight-container{
+    height: 50px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.tool-button {
+    width: 50px;
+    height: 50px;
+    margin: 0 1.5px;
+    border: none;
+    cursor: pointer;
+}
+
+.tool-button:hover {
+    border: 2px solid black;
+}
+
+.tool-button:active {
+    transform: scale(.95);
+}
+
+.not-selected-tool{
+    filter: grayscale(1);
+}
+
+.selected-tool{
+    background: #9664c8;
+}
+
+#clock-div, #rounds-div{
+   margin: auto 15px;
+}
+
+#rounds-div {
+   width: fit-content;
+}
+
+#clock-div {
+   width: 39px;
+   height: 53px;
+   
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+#skribblio-timer {
+   position: absolute;
+   top: -2.5px;
+   left: 12px;
+
+   height: 55px;
+   width: 55px;
+}
+
+#timer-ticker {
+   position: relative;
+
+   z-index: 1;
+}

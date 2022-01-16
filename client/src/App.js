@@ -1,24 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import React, {useState} from 'react';
+
+import GameRoom from "./Components/GameRoom/GameRoom";
+import HomeRoom from "./Components/HomeRoom/HomeRoom"
+import PrivateRoom from "./Components/PrivateRoom/PrivateRoom";
 
 function App() {
+  const [username, setUsername] = useState("");
+  const [drawTime, setDrawTime] = useState(0);
+  const [rounds, setRounds] = useState(0)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <Router>
+        <Routes> 
+            <Route path="/" element={<HomeRoom setUsername={setUsername}/>}/>
+            <Route path="gameroom" element={<GameRoom username={username} drawTime={drawTime} rounds={rounds}/>}/>
+            <Route path="privateroom" element={<PrivateRoom username={username} setDrawTime={setDrawTime} setRounds={setRounds}/>}/>
+        </Routes>
+    </Router>
   );
 }
 

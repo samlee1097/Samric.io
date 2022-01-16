@@ -1,0 +1,13 @@
+.avatar-select-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.avatar-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+}
