@@ -5,7 +5,7 @@ import GameRoom from "./Components/GameRoom/GameRoom";
 import HomeRoom from "./Components/HomeRoom/HomeRoom"
 import PrivateRoom from "./Components/PrivateRoom/PrivateRoom";
 
-function App() {
+function App() { 
   const [username, setUsername] = useState("");
   const [drawTime, setDrawTime] = useState(0);
   const [rounds, setRounds] = useState(0)
