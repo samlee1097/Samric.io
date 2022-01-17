@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
 
-  resources :messages
-  resources :gamerooms
-  resources :users
+  resources :messages, only: [:index, :show, :create]
+  resources :gamerooms, except: [:update]
+  resources :users, except: [:update]
   mount ActionCable.server => "/cable"
   
   # Routing logic: fallback requests for React Router.
