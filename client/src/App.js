@@ -10,6 +10,8 @@ function App() {
   const [drawTime, setDrawTime] = useState(0);
   const [rounds, setRounds] = useState(0)
 
+   console.log("Sam, check this out!");
+
   return (
       <Router>
         <Routes> 
