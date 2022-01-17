@@ -18,8 +18,6 @@ const store = configureStore({
     }
 });
 
-console.log(actionCable);
-
 // ActionCable
 const CableApp = {};
 CableApp.cable = actionCable.createConsumer("ws://localhost:3000/cable");
@@ -28,7 +26,9 @@ export const ActionCableContext = createContext();
 ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>
-            <App />
+           <ActionCableContext.Provider value={CableApp.cable}>
+               <App />
+            </ActionCableContext.Provider>
         </Provider>
     </React.StrictMode>,
   document.getElementById('root')

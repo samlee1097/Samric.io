@@ -1,0 +1,2 @@
+class Gameroom < ApplicationRecord
+end

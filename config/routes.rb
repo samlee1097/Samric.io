@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  resources :messages
+  resources :gamerooms
+  resources :users
   mount ActionCable.server => "/cable"
   
   # Routing logic: fallback requests for React Router.
