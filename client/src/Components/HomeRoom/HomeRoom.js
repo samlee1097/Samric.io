@@ -19,7 +19,8 @@ function HomeRoom() {
 
     function handleSubmit(event){
         event.preventDefault();
-        if(event.target.value === "public"){
+        console.log(event.target)
+        if(event.target.name === "public"){
             history("/gameroom")
         } else {
             history("/privateroom")
@@ -56,7 +57,7 @@ function HomeRoom() {
             </header>
 
             <main id="homepage-main">
-                <form id="character-creation" className="homepage-containers" onSubmit={handleSubmit}>
+                <form id="character-creation" className="homepage-containers" onSubmit={event=> handleSubmit(event)}>
                     <label>
                         <input
                             type="text"
@@ -90,14 +91,14 @@ function HomeRoom() {
 
                     <div id="homepage-buttons-container">
                         <input
-                            type="button"
+                            type="submit"
                             id="play-button"
                             className="homepage-button"
                             name="public"
                             value="Play!"
                         />
                         <input
-                            type="button"
+                            type="submit"
                             id="private-button"
                             className="homepage-button"
                             name="private"
