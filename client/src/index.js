@@ -8,6 +8,7 @@ import {configureStore} from "@reduxjs/toolkit";
 import {Provider} from "react-redux";
 
 import avatarReducer from "./Features/avatarSprite";
+import settingReducer from "./Features/gameSettings";
 
 // Websockets
 import actionCable from 'actioncable';
@@ -15,6 +16,7 @@ import actionCable from 'actioncable';
 const store = configureStore({
     reducer: {
         avatar: avatarReducer,
+        setting: settingReducer
     }
 });
 

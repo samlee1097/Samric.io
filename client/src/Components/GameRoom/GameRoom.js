@@ -8,7 +8,7 @@ import Header from './Header/Header';
 import '../../Stylings/GameRoom.css'
       
 
-function GameRoom({username, drawTime, rounds}) {      
+function GameRoom({username}) {      
 
     const [utensil, SetUtensil] = useState({
         tool: "brush",
@@ -37,7 +37,7 @@ function GameRoom({username, drawTime, rounds}) {
     return (
         <div className="container">
             
-            <Header drawTime={drawTime} rounds={rounds}/>
+            <Header/>
 
             <div id = "middle-section-gameroom">
                 <div>
