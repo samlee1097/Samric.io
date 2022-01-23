@@ -12,6 +12,7 @@ import {updateUsername} from "../../Features/userReducer";
 function HomeRoom() {
     const history = useNavigate();
     const [username, setUsername] = useState('');
+    const dispatch = useDispatch();
 
     function handleChange(event){
         setUsername(()=> event.target.value)
@@ -24,7 +25,7 @@ function HomeRoom() {
         } else {
             history("/privateroom")
         }
-        
+        dispatch(updateUsername({[username]: username}))
     }
     
     // Redux Elements
