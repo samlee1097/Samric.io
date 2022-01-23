@@ -10,13 +10,10 @@ export const avatarSlice = createSlice({
     // Initial values of the state, passed in through the value object
     initialState: {
         value: {
-            top: 0, //37 items 
-            hatColor: 0, //18 items
+            top: 0, //33 items 
             hairColor: 0, //12 items
             accessories: 0, //6 items
             accessoriesColor: 0, //18 items
-            facialHair: 0, //10 items
-            facialHairColor: 0, //12 items
             clothes: 0, //12 items
             clothesColor: 0, //18 items
             eyes: 0, //15 items
@@ -24,7 +21,7 @@ export const avatarSlice = createSlice({
             mouth: 0, //13 items
             skin: 0, //7 items
             clotheGraphics: 0, //10 items
-            imageURL: 'https://avatars.dicebear.com/api/avataaars/:seed.svg?top[]=longHair&hatColor[]=black&hairColor[]=auburn&accessories[]=kurt&accessoriesColor[]=black&facialHair[]=medium&facialHairColor[]=auburn&clothes[]=blazer&clothesColor[]=black&eyes[]=close&eyebrow[]=angry&mouth[]=concerned&skin[]=tanned&clotheGraphics[]=skullOutline'
+            imageURL: 'https://avatars.dicebear.com/api/avataaars/:seed.svg?top[]=longHair&hairColor[]=auburn&accessories[]=round&accessoriesColor[]=black&clothes[]=blazer&clothesColor[]=black&eyes[]=close&eyebrow[]=angry&mouth[]=concerned&skin[]=tanned&clotheGraphics[]=skullOutline'
         }
     },
 
@@ -42,13 +39,10 @@ export const avatarSlice = createSlice({
         },
 
         random: (state) => {
-            state.top = Math.floor(Math.random()*38); //37 items 
-            state.hatColor = Math.floor(Math.random()*19); //18 items
+            state.top = Math.floor(Math.random()*34); //33 items 
             state.hairColor = Math.floor(Math.random()*13); //12 items
             state.accessories = Math.floor(Math.random()*7); //6 items
             state.accessoriesColor = Math.floor(Math.random()*19); //18 items
-            state.facialHair = Math.floor(Math.random()*11); //10 items
-            state.facialHairColor = Math.floor(Math.random()*13); //12 items
             state.clothes = Math.floor(Math.random()*13); //12 items
             state.clothesColor = Math.floor(Math.random()*19); //18 items
             state.eyes = Math.floor(Math.random()*16); //15 items
