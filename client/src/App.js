@@ -13,7 +13,7 @@ function App() {
         <Routes> 
             <Route path="/" element={<HomeRoom setUsername={setUsername}/>}/>
             <Route path="gameroom" element={<GameRoom username={username}/>}/>
-            <Route path="privateroom" element={<PrivateRoom username={username} setSettings={setSettings}/>}/>
+            <Route path="privateroom" element={<PrivateRoom username={username}/>}/>
         </Routes>
     </Router>
   );

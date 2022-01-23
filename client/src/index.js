@@ -9,6 +9,7 @@ import {Provider} from "react-redux";
 
 import avatarReducer from "./Features/avatarSprite";
 import settingReducer from "./Features/gameSettings";
+import userReducer from "./Features/userReducer";
 
 // Websockets
 import actionCable from 'actioncable';
@@ -16,10 +17,12 @@ import actionCable from 'actioncable';
 const store = configureStore({
     reducer: {
         avatar: avatarReducer,
-        setting: settingReducer
+        setting: settingReducer,
+        user: userReducer
     }
 });
 
+console.log(store)
 // ActionCable
 const CableApp = {};
 CableApp.cable = actionCable.createConsumer("ws://localhost:3000/cable");
