@@ -19,8 +19,7 @@ function HomeRoom() {
 
     function handleSubmit(event){
         event.preventDefault();
-        console.log(event.target)
-        if(event.target.name === "public"){
+        if(event.nativeEvent.submitter.name === "public"){
             history("/gameroom")
         } else {
             history("/privateroom")
