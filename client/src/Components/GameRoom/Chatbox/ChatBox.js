@@ -1,4 +1,5 @@
-import React from 'react';
+import Editor from './Editor';
+import React, { useEffect, useState } from 'react';
 
 function ChatBox() {
 
@@ -22,11 +23,17 @@ function ChatBox() {
         }
       }, [gameroomId])
 
+    // The corresponding action in our backend MessagesChanel is receive(data)
+    function sendMessage(content){
+        const data = { gameroomId, userId, content }
+        channel.send(data)
+    }
+
     return (
        <div id="gameroom-chatbox">
            <p>ChatBox</p>
-           {/* Chat input – 330 x 30 
-               Chatbox – 330 x 580*/} 
+           {renderedMessages}
+           <Editor sendMessage={sendMessage} />
        </div>
     );
 }
