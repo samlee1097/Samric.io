@@ -6,7 +6,9 @@ class MessagesChannel < ApplicationCable::Channel
   end
 
   def receive(data)
-   
+    user = User.find_by(id: data['userId'])
+    message = @team.messages.create(content: data['content'], user: user)
+    MessagesChannel.broadcast_to(@team, MessageSerializer.new(message).serialized_json)
   end
 
   def unsubscribed
