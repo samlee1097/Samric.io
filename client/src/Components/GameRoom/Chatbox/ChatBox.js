@@ -1,6 +1,10 @@
 import React, { useEffect, useState, useContext} from 'react';
 import { useParams } from 'react-router';
-import Editor from './Editor';
+import MessageItem from './MessageItem'
+import { ActionCableContext } from '../../..';
+import { useSelector } from 'react-redux'
+import { selectMessagesByTeam } from '../../../Features/messageSlice'
+import TextEntry from './TextEntry';
 
 function ChatBox() {
 
@@ -29,12 +33,20 @@ function ChatBox() {
         const data = { gameroomId, userId, content }
         channel.send(data)
     }
+    
+    const messages = useSelector((state) => selectMessagesByTeam(state, teamId))
+
+    const renderedMessages =
+      messages &&
+      messages.map((message) => (
+        <MessageItem key={message.id} message={message} />
+    ))
 
     return (
        <div id="gameroom-chatbox">
            <p>ChatBox</p>
            {renderedMessages}
-           <Editor sendMessage={sendMessage} />
+           <TextEntry sendMessage={sendMessage} />
        </div>
     );
 }

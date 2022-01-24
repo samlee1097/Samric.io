@@ -22,7 +22,6 @@ const store = configureStore({
     }
 });
 
-console.log(store)
 // ActionCable
 const CableApp = {};
 CableApp.cable = actionCable.createConsumer("ws://localhost:3000/cable");

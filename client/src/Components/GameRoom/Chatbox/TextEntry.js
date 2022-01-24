@@ -1,10 +1,10 @@
 import React from 'react';
 
-function Editor() {
+function TextEntry() {
     return (
        <div>
        </div>
     );
 }
 
-export default Editor;
+export default TextEntry;
