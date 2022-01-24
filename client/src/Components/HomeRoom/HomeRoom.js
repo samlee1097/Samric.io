@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import AvatarSelect from './AvatarSelect';
 import { useNavigate } from 'react-router-dom'
 import {FaPaintBrush} from "react-icons/fa";
@@ -6,30 +6,37 @@ import {BsFillSuitHeartFill, BsGithub} from "react-icons/bs";
 import "../../Stylings/HomeRoom.css";
 
 // Redux Elements
-import {useSelector} from "react-redux";
+import {useSelector, useDispatch} from "react-redux";
+import {updateUsername} from "../../Features/userReducer";
 
-function HomeRoom(setUsername) {
+function HomeRoom() {
     const history = useNavigate();
+    const [username, setUsername] = useState('');
+    const dispatch = useDispatch();
 
-    function handlePrivateButton(event) {
-        history("/privateroom")
-        setUsername(()=> event.target.parentElement.parentElement.parentElement.children[0].childNodes[0].firstChild.value)
+    function handleChange(event){
+        setUsername(()=> event.target.value)
     }
 
-    function handlePlayButton(event) {
-        setUsername(()=> event.target.parentElement.parentElement.parentElement.children[0].childNodes[0].firstChild.value)
+    function handleSubmit(event){
+        event.preventDefault();
+        if(event.nativeEvent.submitter.name === "public"){
+            history("/gameroom")
+        } else {
+            history("/privateroom")
+        }
+        dispatch(updateUsername({[username]: username}))
     }
-
+    
     // Redux Elements
     const avatar = useSelector(state => state.avatar.value);
     const avatarArray = [];
-
     for (const attr in avatar) {
         avatarArray.push(attr);
     }
 
     // Name Array
-   const avatarSectionArray = ["Top", "Hat Color", "Hair Color", "Accessories", "Accessories Color", "Facial Hair", "Facial Hair Color", "Clothes", "Clothes Color", "Eyes", "Eyebrows", "Mouth", "Skin", "Clothes Graphics"];
+   const avatarSectionArray = ["Top", "Hair Color", "Accessories", "Accessories Color", "Clothes", "Clothes Color", "Eyes", "Eyebrows", "Mouth", "Skin", "Clothes Graphics"];
 
     return (
         <div className="App">
@@ -50,7 +57,7 @@ function HomeRoom(setUsername) {
             </header>
 
             <main id="homepage-main">
-                <section id="character-creation" className="homepage-containers">
+                <form id="character-creation" className="homepage-containers" onSubmit={event=> handleSubmit(event)}>
                     <label>
                         <input
                             type="text"
@@ -60,6 +67,7 @@ function HomeRoom(setUsername) {
                             minLength={1}
                             maxLength={32}
                             required
+                            onChange={handleChange}
                         >
                         </input>
                     </label>
@@ -69,35 +77,35 @@ function HomeRoom(setUsername) {
                     <div id="avatar-selection">
                         {/* 14 different selection options */}
                         <AvatarSelect avatar={avatar} name={avatarArray[0]} number={avatar.top} sectionName={avatarSectionArray[0]}/> 
-                        <AvatarSelect avatar={avatar} name={avatarArray[1]} number={avatar.hatColor} sectionName={avatarSectionArray[1]}/>
-                        <AvatarSelect avatar={avatar} name={avatarArray[2]} number={avatar.hairColor} sectionName={avatarSectionArray[2]}/>
-                        <AvatarSelect avatar={avatar} name={avatarArray[3]} number={avatar.accessories} sectionName={avatarSectionArray[3]}/>
-                        <AvatarSelect avatar={avatar} name={avatarArray[4]} number={avatar.accessoriesColor} sectionName={avatarSectionArray[4]}/>
-                        <AvatarSelect avatar={avatar} name={avatarArray[5]} number={avatar.facialHair} sectionName={avatarSectionArray[5]}/>
-                        <AvatarSelect avatar={avatar} name={avatarArray[6]} number={avatar.facialHairColor} sectionName={avatarSectionArray[6]}/>
-                        <AvatarSelect avatar={avatar} name={avatarArray[7]} number={avatar.clothes} sectionName={avatarSectionArray[7]}/>
-                        <AvatarSelect avatar={avatar} name={avatarArray[8]} number={avatar.clothesColor} sectionName={avatarSectionArray[8]}/>
-                        <AvatarSelect avatar={avatar} name={avatarArray[9]} number={avatar.eyes} sectionName={avatarSectionArray[9]}/>
-                        <AvatarSelect avatar={avatar} name={avatarArray[10]} number={avatar.eyebrow} sectionName={avatarSectionArray[10]}/>
-                        <AvatarSelect avatar={avatar} name={avatarArray[11]} number={avatar.mouth} sectionName={avatarSectionArray[11]}/>
-                        <AvatarSelect avatar={avatar} name={avatarArray[12]} number={avatar.skin} sectionName={avatarSectionArray[12]}/>
-                        <AvatarSelect avatar={avatar} name={avatarArray[13]} number={avatar.clotheGraphics} sectionName={avatarSectionArray[13]}/>
+                        <AvatarSelect avatar={avatar} name={avatarArray[1]} number={avatar.hairColor} sectionName={avatarSectionArray[1]}/>
+                        <AvatarSelect avatar={avatar} name={avatarArray[2]} number={avatar.accessories} sectionName={avatarSectionArray[2]}/>
+                        <AvatarSelect avatar={avatar} name={avatarArray[3]} number={avatar.accessoriesColor} sectionName={avatarSectionArray[3]}/>
+                        <AvatarSelect avatar={avatar} name={avatarArray[4]} number={avatar.clothes} sectionName={avatarSectionArray[4]}/>
+                        <AvatarSelect avatar={avatar} name={avatarArray[5]} number={avatar.clothesColor} sectionName={avatarSectionArray[5]}/>
+                        <AvatarSelect avatar={avatar} name={avatarArray[6]} number={avatar.eyes} sectionName={avatarSectionArray[6]}/>
+                        <AvatarSelect avatar={avatar} name={avatarArray[7]} number={avatar.eyebrow} sectionName={avatarSectionArray[7]}/>
+                        <AvatarSelect avatar={avatar} name={avatarArray[8]} number={avatar.mouth} sectionName={avatarSectionArray[8]}/>
+                        <AvatarSelect avatar={avatar} name={avatarArray[9]} number={avatar.skin} sectionName={avatarSectionArray[9]}/>
+                        <AvatarSelect avatar={avatar} name={avatarArray[10]} number={avatar.clotheGraphics} sectionName={avatarSectionArray[10]}/>
                     </div>
 
                     <div id="homepage-buttons-container">
-                        <button
+                        <input
+                            type="submit"
                             id="play-button"
                             className="homepage-button"
-                            onClick={handlePlayButton}
-                        >Play!</button>
-
-                        <button
+                            name="public"
+                            value="Play!"
+                        />
+                        <input
+                            type="submit"
                             id="private-button"
                             className="homepage-button"
-                            onClick={handlePrivateButton}
-                        >Create Private Room</button>
+                            name="private"
+                            value="Create a private room"
+                        />
                     </div>
-                </section>
+                </form>
 
                 <section id="details-section" className="homepage-containers">
                     <details open>
