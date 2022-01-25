@@ -158,10 +158,11 @@
 }
 
 #avatar-selection {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    grid-template-columns: auto auto;
+    padding: 5px;
+    height: 280px;
+    margin-left: 10px;
 }
 
 #homepage-buttons-container {
@@ -315,15 +316,38 @@ footer div:nth-child(3) {
    display: flex;
    justify-content: center;
    align-items: center;
-
    background:rgba(190, 190, 190, 0.2);
    margin-left: 107.5px;
    margin-right: 107.5px;
-
    border-radius: 5px;
 }
 
 #avatar-image{
-    width: auto;
+    width: 100%;
     height: 200px;
+    background-color: white;
+}
+
+#edit-alert{
+    width: 170px;
+    transform: scaleX(1.2);
+    position: relative;
+}
+
+#edit-alert-message{
+    position: relative;
+    top: -66px;
+    left: -2px;
+    font-size: 12px;
+    font-family: 'Mochiy Pop P One', sans-serif;
+    text-align: center;
+}
+
+#customize-avatar-message{
+    width: fit-content;
+    position: relative;
+    left: -15px;
+    top: -200px;
+    float: right;
+    transform: scale(.8);
 }

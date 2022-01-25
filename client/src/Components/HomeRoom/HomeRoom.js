@@ -1,18 +1,27 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import AvatarSelect from './AvatarSelect';
 import { useNavigate } from 'react-router-dom'
 import {FaPaintBrush} from "react-icons/fa";
-import {BsFillSuitHeartFill, BsGithub} from "react-icons/bs";
+import {BsFillSuitHeartFill, BsGithub, BsDice6} from "react-icons/bs";
 import "../../Stylings/HomeRoom.css";
+import chat from "./chat.png"
+import * as style from '@dicebear/avatars-avataaars-sprites';
 
 // Redux Elements
 import {useSelector, useDispatch} from "react-redux";
 import {updateUsername} from "../../Features/userReducer";
 
 function HomeRoom() {
+    // Redux Elements
+    const avatar = useSelector(state => state.avatar.value);
+
     const history = useNavigate();
     const [username, setUsername] = useState('');
     const dispatch = useDispatch();
+    const [image, setImage] = useState(avatar.imageURL);
+    const [funAlert, setFunAlert]=useState(0);
+
+    const funMessages = ["Customizes your avatar!", "Look at me!", "I look so good",  "Look good, play good", "My dog will like this", "Let's kick some butt!", "A new look?", "Mirror mirror on the wall", "This is gonna work!", "I look amazing!", "Wow, what a look!", "Model award goes to...", "YES!! I like this!", "I'm the only ten I see!"]
 
     function handleChange(event){
         setUsername(()=> event.target.value)
@@ -28,16 +37,19 @@ function HomeRoom() {
         dispatch(updateUsername({[username]: username}))
     }
     
-    // Redux Elements
-    const avatar = useSelector(state => state.avatar.value);
+    // Image URL
+    const property = style.schema.properties;
+    const avatarURL = `https://avatars.dicebear.com/api/avataaars/:seed.svg?top[]=${property.top.items.enum[avatar.top]}&hairColor[]=${property.hairColor.items.enum[avatar.hairColor]}&clothes[]=${property.clothes.items.enum[avatar.clothes]}&clothesColor[]=${property.clothesColor.items.enum[avatar.clothesColor]}&eyes[]=${property.eyes.items.enum[avatar.eyes]}&eyebrow[]=${property.eyebrow.items.enum[avatar.eyebrow]}&mouth[]=${property.mouth.items.enum[avatar.mouth]}&skin[]=${property.skin.items.enum[avatar.skin]}`;
+
     const avatarArray = [];
-    for (const attr in avatar) {
-        avatarArray.push(attr);
+    for (const [key, value] of Object.entries(avatar)) {
+        avatarArray.push(<AvatarSelect avatar ={avatar} name={key} number={value} sectionName={(key[0].toUpperCase() + key.slice(1,key.length).replace("C", " C"))} avatarURL={avatarURL} setFunAlert={setFunAlert} funAlert={funAlert}/>)
     }
+    avatarArray.pop();
 
-    // Name Array
-   const avatarSectionArray = ["Top", "Hair Color", "Accessories", "Accessories Color", "Clothes", "Clothes Color", "Eyes", "Eyebrows", "Mouth", "Skin", "Clothes Graphics"];
-
+    // Live changes to the image
+    useEffect(()=>{setImage(avatarURL)},[avatarURL])
+    
     return (
         <div className="App">
             <header id="homepage-header">
@@ -72,21 +84,14 @@ function HomeRoom() {
                         </input>
                     </label>
                     <div id="avatar-container">
-                        <img id="avatar-image" src={avatar.imageURL} alt="Avatar"/>
+                        <img id="avatar-image" src={image} alt="Avatar"/>
+                    </div>
+                    <div id="customize-avatar-message">
+                        <img id="edit-alert" src={chat}/>
+                        <p id="edit-alert-message">{funMessages[funAlert]}</p>
                     </div>
                     <div id="avatar-selection">
-                        {/* 14 different selection options */}
-                        <AvatarSelect avatar={avatar} name={avatarArray[0]} number={avatar.top} sectionName={avatarSectionArray[0]}/> 
-                        <AvatarSelect avatar={avatar} name={avatarArray[1]} number={avatar.hairColor} sectionName={avatarSectionArray[1]}/>
-                        <AvatarSelect avatar={avatar} name={avatarArray[2]} number={avatar.accessories} sectionName={avatarSectionArray[2]}/>
-                        <AvatarSelect avatar={avatar} name={avatarArray[3]} number={avatar.accessoriesColor} sectionName={avatarSectionArray[3]}/>
-                        <AvatarSelect avatar={avatar} name={avatarArray[4]} number={avatar.clothes} sectionName={avatarSectionArray[4]}/>
-                        <AvatarSelect avatar={avatar} name={avatarArray[5]} number={avatar.clothesColor} sectionName={avatarSectionArray[5]}/>
-                        <AvatarSelect avatar={avatar} name={avatarArray[6]} number={avatar.eyes} sectionName={avatarSectionArray[6]}/>
-                        <AvatarSelect avatar={avatar} name={avatarArray[7]} number={avatar.eyebrow} sectionName={avatarSectionArray[7]}/>
-                        <AvatarSelect avatar={avatar} name={avatarArray[8]} number={avatar.mouth} sectionName={avatarSectionArray[8]}/>
-                        <AvatarSelect avatar={avatar} name={avatarArray[9]} number={avatar.skin} sectionName={avatarSectionArray[9]}/>
-                        <AvatarSelect avatar={avatar} name={avatarArray[10]} number={avatar.clotheGraphics} sectionName={avatarSectionArray[10]}/>
+                        {avatarArray}
                     </div>
 
                     <div id="homepage-buttons-container">
@@ -165,7 +170,7 @@ function HomeRoom() {
             </footer>
             
         </div>
-    );
+    )
 }
 
 export default HomeRoom;

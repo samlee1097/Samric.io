@@ -1,13 +1,12 @@
 import React from 'react';
 import "../../Stylings/AvatarSelect.css";
 import {BsFillArrowLeftCircleFill, BsFillArrowRightCircleFill} from "react-icons/bs";
-import * as style from '@dicebear/avatars-avataaars-sprites';
 
 // Redux Elements
 import {useDispatch} from "react-redux";
 import {leftArrow, rightArrow} from "../../Features/avatarSprite";
 
-function AvatarSelect({avatar, name, number, sectionName}) {
+function AvatarSelect({avatar, name, number, sectionName, avatarURL, setFunAlert, funAlert}) {
     const dispatch = useDispatch();
     let modNum = 0;
     switch(name){
@@ -15,18 +14,11 @@ function AvatarSelect({avatar, name, number, sectionName}) {
             modNum = 33;
             break;
         case 'clothesColor':
-        case 'accessoriesColor':
             modNum = 18;
             break;
         case 'hairColor':
         case 'clothes':
             modNum = 12;
-            break;
-        case 'accessories':
-            modNum = 6;
-            break;
-        case 'clotheGraphics':
-            modNum = 10;
             break;
         case 'eyes':
             modNum = 15;
@@ -45,38 +37,57 @@ function AvatarSelect({avatar, name, number, sectionName}) {
     }
 
     const clickLeft = () => {
-        const property = style.schema.properties;
-        const newURL = `https://avatars.dicebear.com/api/avataaars/:seed.svg?top[]=${property.top.items.enum[avatar.top]}&hairColor[]=${property.hairColor.items.enum[avatar.hairColor]}&accessories[]=${property.accessories.items.enum[avatar.accessories]}&accessoriesColor[]=${property.accessoriesColor.items.enum[avatar.accessoriesColor]}&clothes[]=${property.clothes.items.enum[avatar.clothes]}&clothesColor[]=${property.clothesColor.items.enum[avatar.clothesColor]}&eyes[]=${property.eyes.items.enum[avatar.eyes]}&eyebrow[]=${property.eyebrow.items.enum[avatar.eyebrow]}&mouth[]=${property.mouth.items.enum[avatar.mouth]}&skin[]=${property.skin.items.enum[avatar.skin]}&clotheGraphics[]=${property.clotheGraphics.items.enum[avatar.clotheGraphics]}`;
 
-        if (number - 1 < 0) {
+        if(funAlert + 1 > 13){
+            setFunAlert(()=>1)
+        } else {
+            setFunAlert(num => num+1)
+        }
+
+        if(name === 'top' && number - 1 < 6){
+            number = modNum;
+        }
+        else if (number - 1 < 0) {
             number = modNum;
         }
 
         dispatch(leftArrow({
             ...avatar,
             [name]: number - 1,
-            imageURL: `${newURL}`
+            imageURL: `${avatarURL}`
         }))
     } 
 
-    const clickRight = () => {
-        const property = style.schema.properties;
-        const newURL = `https://avatars.dicebear.com/api/avataaars/:seed.svg?top[]=${property.top.items.enum[avatar.top]}&hairColor[]=${property.hairColor.items.enum[avatar.hairColor]}&accessories[]=${property.accessories.items.enum[avatar.accessories]}&accessoriesColor[]=${property.accessoriesColor.items.enum[avatar.accessoriesColor]}&clothes[]=${property.clothes.items.enum[avatar.clothes]}&clothesColor[]=${property.clothesColor.items.enum[avatar.clothesColor]}&eyes[]=${property.eyes.items.enum[avatar.eyes]}&eyebrow[]=${property.eyebrow.items.enum[avatar.eyebrow]}&mouth[]=${property.mouth.items.enum[avatar.mouth]}&skin[]=${property.skin.items.enum[avatar.skin]}&clotheGraphics[]=${property.clotheGraphics.items.enum[avatar.clotheGraphics]}`;
-        
-        dispatch(rightArrow({
-            ...avatar,
-            [name]: (number + 1) % modNum,
-            imageURL: `${newURL}`
-        }))
+    const clickRight = () => {    
+
+        if(funAlert + 1 > 13){
+            setFunAlert(()=>1)
+        } else {
+            setFunAlert(num => num+1)
+        }
+
+        if(name === 'top' && number + 1 > 32){
+            dispatch(rightArrow({
+                ...avatar,
+                [name]: 6,
+                imageURL: `${avatarURL}`
+            }))
+        } else {
+            dispatch(rightArrow({
+                ...avatar,
+                [name]: (number + 1) % modNum,
+                imageURL: `${avatarURL}`
+            }))
+        }
     }
     
     return (
         <div title={name} className="avatar-select-div">
-            <BsFillArrowLeftCircleFill onClick={clickLeft}/>
+            <BsFillArrowLeftCircleFill className="arrow-left" onClick={clickLeft}/>
                 <div className="avatar-image-container">
                     {sectionName}
                 </div>
-            <BsFillArrowRightCircleFill onClick={clickRight}/>
+            <BsFillArrowRightCircleFill className="arrow-right" onClick={clickRight}/>
         </div>
     );
 }
