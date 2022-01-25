@@ -10,18 +10,15 @@ export const avatarSlice = createSlice({
     // Initial values of the state, passed in through the value object
     initialState: {
         value: {
-            top: 0, //33 items 
+            top: 6, //26 items 
             hairColor: 0, //12 items
-            accessories: 0, //6 items
-            accessoriesColor: 0, //18 items
             clothes: 0, //12 items
             clothesColor: 0, //18 items
             eyes: 0, //15 items
             eyebrow: 0, //19 items
             mouth: 0, //13 items
             skin: 0, //7 items
-            clotheGraphics: 0, //10 items
-            imageURL: 'https://avatars.dicebear.com/api/avataaars/:seed.svg?top[]=longHair&hairColor[]=auburn&accessories[]=round&accessoriesColor[]=black&clothes[]=blazer&clothesColor[]=black&eyes[]=close&eyebrow[]=angry&mouth[]=concerned&skin[]=tanned&clotheGraphics[]=skullOutline'
+            imageURL: 'https://avatars.dicebear.com/api/avataaars/:seed.svg?top[]=bigHair&hairColor[]=auburn&clothes[]=blazer&clothesColor[]=black&eyes[]=close&eyebrow[]=angry&mouth[]=concerned&skin[]=tanned'
         }
     },
 
@@ -39,17 +36,14 @@ export const avatarSlice = createSlice({
         },
 
         random: (state) => {
-            state.top = Math.floor(Math.random()*34); //33 items 
+            state.top = Math.ceil(Math.random() * (33 - 6) + 6); //26 items starting from 6 -> 32
             state.hairColor = Math.floor(Math.random()*13); //12 items
-            state.accessories = Math.floor(Math.random()*7); //6 items
-            state.accessoriesColor = Math.floor(Math.random()*19); //18 items
             state.clothes = Math.floor(Math.random()*13); //12 items
             state.clothesColor = Math.floor(Math.random()*19); //18 items
             state.eyes = Math.floor(Math.random()*16); //15 items
             state.eyebrow = Math.floor(Math.random()*20); //19 items
             state.mouth = Math.floor(Math.random()*14); //13 items
             state.skin = Math.floor(Math.random()*8); //7 items
-            state.clotheGraphics = Math.floor(Math.random()*11); //10 items
         }
     }
 })

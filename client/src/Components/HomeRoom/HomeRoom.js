@@ -36,7 +36,7 @@ function HomeRoom() {
     }
 
     // Name Array
-   const avatarSectionArray = ["Top", "Hair Color", "Accessories", "Accessories Color", "Clothes", "Clothes Color", "Eyes", "Eyebrows", "Mouth", "Skin", "Clothes Graphics"];
+   const avatarSectionArray = ["Top", "Hair Color", "Clothes", "Clothes Color", "Eyes", "Eyebrows", "Mouth", "Skin"];
 
     return (
         <div className="App">
@@ -78,15 +78,12 @@ function HomeRoom() {
                         {/* 14 different selection options */}
                         <AvatarSelect avatar={avatar} name={avatarArray[0]} number={avatar.top} sectionName={avatarSectionArray[0]}/> 
                         <AvatarSelect avatar={avatar} name={avatarArray[1]} number={avatar.hairColor} sectionName={avatarSectionArray[1]}/>
-                        <AvatarSelect avatar={avatar} name={avatarArray[2]} number={avatar.accessories} sectionName={avatarSectionArray[2]}/>
-                        <AvatarSelect avatar={avatar} name={avatarArray[3]} number={avatar.accessoriesColor} sectionName={avatarSectionArray[3]}/>
-                        <AvatarSelect avatar={avatar} name={avatarArray[4]} number={avatar.clothes} sectionName={avatarSectionArray[4]}/>
-                        <AvatarSelect avatar={avatar} name={avatarArray[5]} number={avatar.clothesColor} sectionName={avatarSectionArray[5]}/>
-                        <AvatarSelect avatar={avatar} name={avatarArray[6]} number={avatar.eyes} sectionName={avatarSectionArray[6]}/>
-                        <AvatarSelect avatar={avatar} name={avatarArray[7]} number={avatar.eyebrow} sectionName={avatarSectionArray[7]}/>
-                        <AvatarSelect avatar={avatar} name={avatarArray[8]} number={avatar.mouth} sectionName={avatarSectionArray[8]}/>
-                        <AvatarSelect avatar={avatar} name={avatarArray[9]} number={avatar.skin} sectionName={avatarSectionArray[9]}/>
-                        <AvatarSelect avatar={avatar} name={avatarArray[10]} number={avatar.clotheGraphics} sectionName={avatarSectionArray[10]}/>
+                        <AvatarSelect avatar={avatar} name={avatarArray[2]} number={avatar.clothes} sectionName={avatarSectionArray[2]}/>
+                        <AvatarSelect avatar={avatar} name={avatarArray[3]} number={avatar.clothesColor} sectionName={avatarSectionArray[3]}/>
+                        <AvatarSelect avatar={avatar} name={avatarArray[4]} number={avatar.eyes} sectionName={avatarSectionArray[4]}/>
+                        <AvatarSelect avatar={avatar} name={avatarArray[5]} number={avatar.eyebrow} sectionName={avatarSectionArray[5]}/>
+                        <AvatarSelect avatar={avatar} name={avatarArray[6]} number={avatar.mouth} sectionName={avatarSectionArray[6]}/>
+                        <AvatarSelect avatar={avatar} name={avatarArray[7]} number={avatar.skin} sectionName={avatarSectionArray[7]}/>
                     </div>
 
                     <div id="homepage-buttons-container">

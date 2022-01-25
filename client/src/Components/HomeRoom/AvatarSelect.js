@@ -15,18 +15,11 @@ function AvatarSelect({avatar, name, number, sectionName}) {
             modNum = 33;
             break;
         case 'clothesColor':
-        case 'accessoriesColor':
             modNum = 18;
             break;
         case 'hairColor':
         case 'clothes':
             modNum = 12;
-            break;
-        case 'accessories':
-            modNum = 6;
-            break;
-        case 'clotheGraphics':
-            modNum = 10;
             break;
         case 'eyes':
             modNum = 15;
@@ -46,9 +39,12 @@ function AvatarSelect({avatar, name, number, sectionName}) {
 
     const clickLeft = () => {
         const property = style.schema.properties;
-        const newURL = `https://avatars.dicebear.com/api/avataaars/:seed.svg?top[]=${property.top.items.enum[avatar.top]}&hairColor[]=${property.hairColor.items.enum[avatar.hairColor]}&accessories[]=${property.accessories.items.enum[avatar.accessories]}&accessoriesColor[]=${property.accessoriesColor.items.enum[avatar.accessoriesColor]}&clothes[]=${property.clothes.items.enum[avatar.clothes]}&clothesColor[]=${property.clothesColor.items.enum[avatar.clothesColor]}&eyes[]=${property.eyes.items.enum[avatar.eyes]}&eyebrow[]=${property.eyebrow.items.enum[avatar.eyebrow]}&mouth[]=${property.mouth.items.enum[avatar.mouth]}&skin[]=${property.skin.items.enum[avatar.skin]}&clotheGraphics[]=${property.clotheGraphics.items.enum[avatar.clotheGraphics]}`;
-
-        if (number - 1 < 0) {
+        const newURL = `https://avatars.dicebear.com/api/avataaars/:seed.svg?top[]=${property.top.items.enum[avatar.top]}&hairColor[]=${property.hairColor.items.enum[avatar.hairColor]}&clothes[]=${property.clothes.items.enum[avatar.clothes]}&clothesColor[]=${property.clothesColor.items.enum[avatar.clothesColor]}&eyes[]=${property.eyes.items.enum[avatar.eyes]}&eyebrow[]=${property.eyebrow.items.enum[avatar.eyebrow]}&mouth[]=${property.mouth.items.enum[avatar.mouth]}&skin[]=${property.skin.items.enum[avatar.skin]}`;
+        console.log(number)
+        if(name === 'top' && number - 1 < 6){
+            number = modNum;
+        }
+        else if (number - 1 < 0) {
             number = modNum;
         }
 
@@ -61,13 +57,23 @@ function AvatarSelect({avatar, name, number, sectionName}) {
 
     const clickRight = () => {
         const property = style.schema.properties;
-        const newURL = `https://avatars.dicebear.com/api/avataaars/:seed.svg?top[]=${property.top.items.enum[avatar.top]}&hairColor[]=${property.hairColor.items.enum[avatar.hairColor]}&accessories[]=${property.accessories.items.enum[avatar.accessories]}&accessoriesColor[]=${property.accessoriesColor.items.enum[avatar.accessoriesColor]}&clothes[]=${property.clothes.items.enum[avatar.clothes]}&clothesColor[]=${property.clothesColor.items.enum[avatar.clothesColor]}&eyes[]=${property.eyes.items.enum[avatar.eyes]}&eyebrow[]=${property.eyebrow.items.enum[avatar.eyebrow]}&mouth[]=${property.mouth.items.enum[avatar.mouth]}&skin[]=${property.skin.items.enum[avatar.skin]}&clotheGraphics[]=${property.clotheGraphics.items.enum[avatar.clotheGraphics]}`;
+        const newURL = `https://avatars.dicebear.com/api/avataaars/:seed.svg?top[]=${property.top.items.enum[avatar.top]}&hairColor[]=${property.hairColor.items.enum[avatar.hairColor]}&clothes[]=${property.clothes.items.enum[avatar.clothes]}&clothesColor[]=${property.clothesColor.items.enum[avatar.clothesColor]}&eyes[]=${property.eyes.items.enum[avatar.eyes]}&eyebrow[]=${property.eyebrow.items.enum[avatar.eyebrow]}&mouth[]=${property.mouth.items.enum[avatar.mouth]}&skin[]=${property.skin.items.enum[avatar.skin]}`;
         
-        dispatch(rightArrow({
-            ...avatar,
-            [name]: (number + 1) % modNum,
-            imageURL: `${newURL}`
-        }))
+        if(name === 'top' && number + 1 > 32){
+            console.log(number)
+            dispatch(rightArrow({
+                ...avatar,
+                [name]: 6,
+                imageURL: `${newURL}`
+            }))
+        } else {
+            dispatch(rightArrow({
+                ...avatar,
+                [name]: (number + 1) % modNum,
+                imageURL: `${newURL}`
+            }))
+        }
+        
     }
     
     return (
