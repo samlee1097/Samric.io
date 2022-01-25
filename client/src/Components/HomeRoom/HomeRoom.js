@@ -2,8 +2,9 @@ import React, {useEffect, useState} from 'react';
 import AvatarSelect from './AvatarSelect';
 import { useNavigate } from 'react-router-dom'
 import {FaPaintBrush} from "react-icons/fa";
-import {BsFillSuitHeartFill, BsGithub} from "react-icons/bs";
+import {BsFillSuitHeartFill, BsGithub, BsDice6} from "react-icons/bs";
 import "../../Stylings/HomeRoom.css";
+import chat from "./chat.png"
 import * as style from '@dicebear/avatars-avataaars-sprites';
 
 // Redux Elements
@@ -17,7 +18,10 @@ function HomeRoom() {
     const history = useNavigate();
     const [username, setUsername] = useState('');
     const dispatch = useDispatch();
-    const [image, setImage] = useState(avatar.imageURL)
+    const [image, setImage] = useState(avatar.imageURL);
+    const [funAlert, setFunAlert]=useState(0);
+
+    const funMessages = ["Customizes your avatar!", "Look at me!", "I look so good",  "Look good, play good", "My dog will like this", "Let's kick some butt!", "A new look?", "Mirror mirror on the wall", "This is gonna work!", "I look amazing!", "Wow, what a look!", "Model award goes to...", "YES!! I like this!", "I'm the only ten I see!"]
 
     function handleChange(event){
         setUsername(()=> event.target.value)
@@ -39,7 +43,7 @@ function HomeRoom() {
 
     const avatarArray = [];
     for (const [key, value] of Object.entries(avatar)) {
-        avatarArray.push(<AvatarSelect avatar ={avatar} name={key} number={value} sectionName={(key[0].toUpperCase() + key.slice(1,key.length).replace("C", " C"))} avatarURL={avatarURL}/>)
+        avatarArray.push(<AvatarSelect avatar ={avatar} name={key} number={value} sectionName={(key[0].toUpperCase() + key.slice(1,key.length).replace("C", " C"))} avatarURL={avatarURL} setFunAlert={setFunAlert} funAlert={funAlert}/>)
     }
     avatarArray.pop();
 
@@ -81,6 +85,10 @@ function HomeRoom() {
                     </label>
                     <div id="avatar-container">
                         <img id="avatar-image" src={image} alt="Avatar"/>
+                    </div>
+                    <div id="customize-avatar-message">
+                        <img id="edit-alert" src={chat}/>
+                        <p id="edit-alert-message">{funMessages[funAlert]}</p>
                     </div>
                     <div id="avatar-selection">
                         {avatarArray}

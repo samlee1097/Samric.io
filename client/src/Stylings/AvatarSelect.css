@@ -1,13 +1,49 @@
 .avatar-select-div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(51, 82, 219, 0.281);
+    border-radius: 10px;
+    padding: 10px 3px;
+    text-align: center;
+    width: 215px;
+    margin: auto 10px;
+    box-shadow: 3px 3px 2px 1px rgba(2, 82, 173, 0.308);
+    font-family: 'Mochiy Pop P One', sans-serif;
 }
 
 .avatar-image-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 250px;
+    display: inline;
+    position: relative;
+    font-size: 12px;
+    top: -1px;
+}
+
+.arrow-left{
+    position: relative;
+    cursor: pointer;
+    width: 50px;
+    float: left;
+    top: 4px;
+    z-index: 1;
+    color: rgb(0, 62, 112);
+    transform: scale(1.4);
+}
+
+.arrow-right{
+    position: relative;
+    cursor: pointer;
+    width: 50px;
+    float: right;
+    top: 4px;
+    z-index: 1;
+    color: rgb(0, 62, 112);
+    transform: scale(1.4);
+}
+
+.arrow-left:hover,
+.arrow-right:hover{
+    position: relative;
+    top: 4px;
+    z-index: 1;
+    transform: scale(1.5);
+    color: rgb(0, 101, 184);
 }

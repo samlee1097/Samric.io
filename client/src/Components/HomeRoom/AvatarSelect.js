@@ -6,7 +6,7 @@ import {BsFillArrowLeftCircleFill, BsFillArrowRightCircleFill} from "react-icons
 import {useDispatch} from "react-redux";
 import {leftArrow, rightArrow} from "../../Features/avatarSprite";
 
-function AvatarSelect({avatar, name, number, sectionName, avatarURL}) {
+function AvatarSelect({avatar, name, number, sectionName, avatarURL, setFunAlert, funAlert}) {
     const dispatch = useDispatch();
     let modNum = 0;
     switch(name){
@@ -38,6 +38,12 @@ function AvatarSelect({avatar, name, number, sectionName, avatarURL}) {
 
     const clickLeft = () => {
 
+        if(funAlert + 1 > 13){
+            setFunAlert(()=>1)
+        } else {
+            setFunAlert(num => num+1)
+        }
+
         if(name === 'top' && number - 1 < 6){
             number = modNum;
         }
@@ -53,6 +59,13 @@ function AvatarSelect({avatar, name, number, sectionName, avatarURL}) {
     } 
 
     const clickRight = () => {    
+
+        if(funAlert + 1 > 13){
+            setFunAlert(()=>1)
+        } else {
+            setFunAlert(num => num+1)
+        }
+
         if(name === 'top' && number + 1 > 32){
             dispatch(rightArrow({
                 ...avatar,
@@ -70,11 +83,11 @@ function AvatarSelect({avatar, name, number, sectionName, avatarURL}) {
     
     return (
         <div title={name} className="avatar-select-div">
-            <BsFillArrowLeftCircleFill onClick={clickLeft}/>
+            <BsFillArrowLeftCircleFill className="arrow-left" onClick={clickLeft}/>
                 <div className="avatar-image-container">
                     {sectionName}
                 </div>
-            <BsFillArrowRightCircleFill onClick={clickRight}/>
+            <BsFillArrowRightCircleFill className="arrow-right" onClick={clickRight}/>
         </div>
     );
 }
