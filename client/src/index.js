@@ -22,6 +22,7 @@ const store = configureStore({
     }
 });
 
+// Create POST request on homeroom, grab the id from the homeroom, pass id to private room
 // ActionCable
 const CableApp = {};
 CableApp.cable = actionCable.createConsumer("ws://localhost:3000/cable");
