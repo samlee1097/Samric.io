@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import AvatarSelect from './AvatarSelect';
 import { useNavigate } from 'react-router-dom'
 import {FaPaintBrush} from "react-icons/fa";
-import {BsFillSuitHeartFill, BsGithub, BsDice6} from "react-icons/bs";
+import {BsFillSuitHeartFill, BsGithub} from "react-icons/bs";
 import "../../Stylings/HomeRoom.css";
 import chat from "./chat.png"
 import * as style from '@dicebear/avatars-avataaars-sprites';
@@ -29,12 +29,27 @@ function HomeRoom() {
 
     function handleSubmit(event){
         event.preventDefault();
+        dispatch(updateUsername({[username]: username}));
+
+        fetch('/users', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: username,
+                avatar: image,
+                points: 0,
+                isDrawing: false
+            })
+        })
+        
         if(event.nativeEvent.submitter.name === "public"){
             history("/gameroom")
         } else {
             history("/privateroom")
         }
-        dispatch(updateUsername({[username]: username}))
+
     }
     
     // Image URL
