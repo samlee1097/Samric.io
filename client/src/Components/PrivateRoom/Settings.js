@@ -1,14 +1,12 @@
 import React from 'react';
-import { useNavigate } from "react-router-dom";
 
-function Settings({setDrawTime, setRounds}) {
-    const history = useNavigate();
+function Settings({setDrawTime, setRounds, setRoom}) {
 
     function startGame(e) {
         e.preventDefault();
         setDrawTime(parseInt((e.target[1].value), 10))
         setRounds(parseInt((e.target[0].value), 10))
-        history("/gameroom");
+        setRoom(()=>"game");
     }
 
     return (

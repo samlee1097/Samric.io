@@ -1,27 +1,25 @@
 import React, {useEffect, useState} from 'react';
 import AvatarSelect from './AvatarSelect';
-import { useNavigate } from 'react-router-dom'
 import {FaPaintBrush} from "react-icons/fa";
-import {BsFillSuitHeartFill, BsGithub, BsDice6} from "react-icons/bs";
+import {BsFillSuitHeartFill, BsGithub} from "react-icons/bs";
 import "../../Stylings/HomeRoom.css";
 import chat from "./chat.png"
 import * as style from '@dicebear/avatars-avataaars-sprites';
+import { v4 as uuidv4 } from 'uuid';
 
 // Redux Elements
 import {useSelector, useDispatch} from "react-redux";
 import {updateUsername} from "../../Features/userReducer";
 
-function HomeRoom() {
+function HomeRoom({setRoom, setGameId, setId}) {
     // Redux Elements
-    const avatar = useSelector(state => state.avatar.value);
-
-    const history = useNavigate();
-    const [username, setUsername] = useState('');
     const dispatch = useDispatch();
+    const avatar = useSelector(state => state.avatar.value);
+    const [username, setUsername] = useState('');
     const [image, setImage] = useState(avatar.imageURL);
     const [funAlert, setFunAlert]=useState(0);
 
-    const funMessages = ["Customizes your avatar!", "Look at me!", "I look so good",  "Look good, play good", "My dog will like this", "Let's kick some butt!", "A new look?", "Mirror mirror on the wall", "This is gonna work!", "I look amazing!", "Wow, what a look!", "Model award goes to...", "YES!! I like this!", "I'm the only ten I see!"]
+    const funMessages = ["Customizes your avatar!", "Look at me!", "I look so good",  "Look good, play good", "My dog will like this", "Let's kick some butt!", "A new look?", "Mirror mirror on the wall", "This is gonna work!", "I look amazing!", "Wow, what a look!", "Model award goes to...", "YES!! I like this!", "I'm the only ten I see!"];
 
     function handleChange(event){
         setUsername(()=> event.target.value)
@@ -29,12 +27,43 @@ function HomeRoom() {
 
     function handleSubmit(event){
         event.preventDefault();
+        dispatch(updateUsername({[username]: username}));
+
+        fetch('/users', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: username,
+                avatar: image,
+                points: 0,
+                isDrawing: false
+            })
+        })
+        .then(res => res.json())
+        .then(data=>{
+            setId(()=>data.id)
+        })
+        
         if(event.nativeEvent.submitter.name === "public"){
-            history("/gameroom")
+            setRoom(()=>"game")
         } else {
-            history("/privateroom")
+            fetch('/gamerooms', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body:JSON.stringify({
+                    name: uuidv4()
+                })
+            })
+            .then(res => res.json())
+            .then(data=>{
+                setGameId(()=>data.id)
+                setRoom(()=>"private")
+            })
         }
-        dispatch(updateUsername({[username]: username}))
     }
     
     // Image URL

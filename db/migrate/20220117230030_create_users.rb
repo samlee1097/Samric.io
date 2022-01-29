@@ -3,7 +3,8 @@ class CreateUsers < ActiveRecord::Migration[6.1]
     create_table :users do |t|
       t.string :name
       t.string :avatar
-      t.integer :points
+      t.integer :points, :default => 0
+      t.boolean :isDrawing
 
       t.timestamps
     end
