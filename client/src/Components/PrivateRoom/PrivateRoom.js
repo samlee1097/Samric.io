@@ -1,18 +1,19 @@
 import React, { useEffect, useState, useContext} from 'react';
 import Settings from './Settings';
 import PrivateRoomPlayers from './PrivateRoomPlayers';
-import InviteFriends from './InviteFriends';
-import { ActionCableContext } from '../../../index.js';
+import InviteFriends from './InviteFriends'
+import { useSelector } from 'react-redux';
+import { ActionCableContext } from '../../';
 import '../../Stylings/PrivateRoom.css'
 
 function PrivateRoom({setDrawTime, setRounds, setRoom, gameId, userId}) {
     const cable = useContext(ActionCableContext)
     const [channel, setChannel] = useState(null)
-
+    const users = useSelector(state => state.user.value);
     useEffect(() => {
         // Create a new subscription w/ channel & id, corresponding to the subscribed action in our backend
         const channel = cable.subscriptions.create({
-          channel: 'PrivateroomChannel',
+          channel: 'MessagesChannel',
           id: gameId,
         }, 
         {

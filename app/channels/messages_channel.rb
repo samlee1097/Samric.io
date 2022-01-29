@@ -6,6 +6,7 @@ class MessagesChannel < ApplicationCable::Channel
   end
 
   def receive(data)
+    puts "#{data}"
     user = User.find_by(id: data['userId'])
     message = @gameroom.messages.create(content: data['content'], user: user)
     MessagesChannel.broadcast_to(@gameroom, MessageSerializer.new(message).serialized_json)
