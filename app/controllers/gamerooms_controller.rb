@@ -36,7 +36,7 @@ class GameroomsController < ApplicationController
    private
 
    def gameroom_params
-      params.permit(:name)
+      params.permit(:key)
    end
    
 end

@@ -1,19 +1,32 @@
 import React, { useEffect, useState, useContext} from 'react';
-import { useParams } from 'react-router';
 import MessageItem from './MessageItem'
 import { ActionCableContext } from '../../..';
 import { useSelector } from 'react-redux'
 import { selectMessagesByTeam } from '../../../Features/messageSlice'
-import TextEntry from './TextEntry';
 
 function ChatBox() {
 
-    // const cable = useContext(ActionCableContext)
-    // const [channel, setChannel] = useState(null)
-    // // React Hook method that extracts an object of the key/value pairs of the URL parameter
-    // const { gameroomId } = useParams()
+    const [msgToSend, setMsgToSend] = useState('');
+    const [messages, setMessages] = useState([]);
+    const cable = useContext(ActionCableContext);
+    const [channel, setChannel] = useState(null);
+    const [currentGameRoom, setCurrentGameRoom] = useState(null);
 
     // useEffect(() => {
+
+    //   fetch('/gameroom', {
+    //     method: "POST",
+    //     headers: {
+    //       'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify({
+    //         name: username,
+    //         avatar: image,
+    //         points: 0,
+    //         isDrawing: false
+    //     })       
+    //   })
+
     //     // Create a new subscription w/ channel & id, corresponding to the subscribed action in our backend
     //     const channel = cable.subscriptions.create({
     //       channel: 'MessagesChannel',
@@ -28,25 +41,26 @@ function ChatBox() {
     //     }
     //   }, [gameroomId])
 
-    // // The corresponding action in our backend MessagesChanel is receive(data)
+    // The corresponding action in our backend MessagesChanel is receive(data)
     // function sendMessage(content){
     //     const data = { gameroomId, userId, content }
     //     channel.send(data)
     // }
-    
-    // const messages = useSelector((state) => selectMessagesByTeam(state, teamId))
 
-    // const renderedMessages =
-    //   messages &&
-    //   messages.map((message) => (
-    //     <MessageItem key={message.id} message={message} />
-    // ))
+    const renderedMessages =
+      messages &&
+      messages.map((message) => (
+        <MessageItem key={message.id} message={message} />
+    ))
 
     return (
        <div id="gameroom-chatbox">
            <p>ChatBox</p>
-           {/* {renderedMessages}
-           <TextEntry sendMessage={sendMessage} /> */}
+                {renderedMessages}
+           <form>
+                <input className="sender" type="text" value={msgToSend} onChange={e => setMsgToSend(e.target.value)}/>
+                <button className="sender-submit" type="submit">Send</button>
+            </form>
        </div>
     );
 }

@@ -38,7 +38,8 @@ function HomeRoom({setRoom, setGameId, setId}) {
                 name: username,
                 avatar: image,
                 points: 0,
-                isDrawing: false
+                isDrawing: false,
+                isLeader: true,
             })
         })
         .then(res => res.json())
