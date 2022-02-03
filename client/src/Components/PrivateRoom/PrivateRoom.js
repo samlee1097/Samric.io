@@ -5,7 +5,7 @@ import '../../Stylings/PrivateRoom.css';
 import PrivateRoomPlayers from './PrivateRoomPlayers';
 import Logo from '../Logo';
 
-function PrivateRoom({setDrawTime, setRounds, setRoom, gameId}) {
+function PrivateRoom({setDrawTime, setRounds, setRoom, gameId, userList}) {
 
     return (
         <>  
@@ -14,7 +14,7 @@ function PrivateRoom({setDrawTime, setRounds, setRoom, gameId}) {
             </div>
             <div id="private-room-top">
                 <Settings setDrawTime={setDrawTime} setRounds={setRounds} setRoom={setRoom}/>
-                <PrivateRoomPlayers/>
+                <PrivateRoomPlayers userList={userList}/>
             </div> 
             <div id="private-room-bottom">
                 <InviteFriends gameId={gameId}/>

@@ -10,7 +10,7 @@ import Logo from '../Logo';
 import {useSelector, useDispatch} from "react-redux";
 import {updateUsername} from "../../Features/userReducer";
 
-function HomeRoom({setRoom, socket}) {
+function HomeRoom({setRoom, socket, setUserList}) {
     // Redux Elements
     const dispatch = useDispatch();
     const avatar = useSelector(state => state.avatar.value);
@@ -21,16 +21,30 @@ function HomeRoom({setRoom, socket}) {
 
     const funMessages = ["Customizes your avatar!", "Look at me!", "I look so good",  "Look good, play good", "My dog will like this", "Let's kick some butt!", "A new look?", "Mirror mirror on the wall", "This is gonna work!", "I look amazing!", "Wow, what a look!", "Model award goes to...", "YES!! I like this!", "I'm the only ten I see!"];
 
-    function handleSubmit(event){
+    async function handleSubmit(event){
         event.preventDefault();
+        
+        const userData = {
+            username: username,
+            gameId: gameId,
+            avatar: image,
+        }
 
-        if (username !== "" && gameId !== "") {
+        if (username !== "" && gameId !== "") {      
             dispatch(updateUsername({"username": username, "gameId": gameId}));
             setRoom(()=>"private");
-            socket.emit("join_room", gameId);
-            console.log(socket)
+            socket.emit("join_private_room", gameId); 
+            await socket.emit("add_user", userData);
+            setUserList((list)=> [...list, userData]);
         }
     }
+
+    useEffect(() => {
+        socket.on("receive_user", (data) => {
+            setUserList((list)=> [...list, data]);
+          });
+    }, [socket]);
+  
     
     // Image URL
     const property = style.schema.properties;
