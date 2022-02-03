@@ -10,42 +10,37 @@ import Logo from '../Logo';
 import {useSelector, useDispatch} from "react-redux";
 import {updateUsername} from "../../Features/userReducer";
 
-function HomeRoom({setRoom, socket, setUserList}) {
+function HomeRoom({setRoom, socket, setUserList, socketId}) {
     // Redux Elements
     const dispatch = useDispatch();
     const avatar = useSelector(state => state.avatar.value);
-    const [username, setUsername] = useState('');
+    const [usernameEntry, setUsername] = useState('');
     const [gameId, setGameId] = useState('');
     const [image, setImage] = useState(avatar.imageURL);
     const [funAlert, setFunAlert]=useState(0);
-
+ 
     const funMessages = ["Customizes your avatar!", "Look at me!", "I look so good",  "Look good, play good", "My dog will like this", "Let's kick some butt!", "A new look?", "Mirror mirror on the wall", "This is gonna work!", "I look amazing!", "Wow, what a look!", "Model award goes to...", "YES!! I like this!", "I'm the only ten I see!"];
+   
+    const userData = {
+        username: usernameEntry,
+        gameId: gameId,
+        avatar: image,
+        id: socketId
+    }
+    socket.on("broadcast", (data) => {
+        setUserList(()=> data.user_list);
+    });
 
     async function handleSubmit(event){
         event.preventDefault();
-        
-        const userData = {
-            username: username,
-            gameId: gameId,
-            avatar: image,
-        }
 
-        if (username !== "" && gameId !== "") {      
-            dispatch(updateUsername({"username": username, "gameId": gameId}));
+        if (usernameEntry !== "" && gameId !== "") {      
+            dispatch(updateUsername({"username": usernameEntry, "gameId": gameId}));
             setRoom(()=>"private");
-            socket.emit("join_private_room", gameId); 
-            await socket.emit("add_user", userData);
-            setUserList((list)=> [...list, userData]);
+            await socket.emit("join_private_room", userData); 
         }
     }
 
-    useEffect(() => {
-        socket.on("receive_user", (data) => {
-            setUserList((list)=> [...list, data]);
-          });
-    }, [socket]);
-  
-    
     // Image URL
     const property = style.schema.properties;
     const avatarURL = `https://avatars.dicebear.com/api/avataaars/:seed.svg?top[]=${property.top.items.enum[avatar.top]}&hairColor[]=${property.hairColor.items.enum[avatar.hairColor]}&clothes[]=${property.clothes.items.enum[avatar.clothes]}&clothesColor[]=${property.clothesColor.items.enum[avatar.clothesColor]}&eyes[]=${property.eyes.items.enum[avatar.eyes]}&eyebrow[]=${property.eyebrow.items.enum[avatar.eyebrow]}&mouth[]=${property.mouth.items.enum[avatar.mouth]}&skin[]=${property.skin.items.enum[avatar.skin]}`;
@@ -73,7 +68,7 @@ function HomeRoom({setRoom, socket, setUserList}) {
                             minLength={1}
                             maxLength={32}
                             required
-                            value={username}
+                            value={usernameEntry}
                             onChange={e=>setUsername(e.target.value)}
                         />
                         <input
