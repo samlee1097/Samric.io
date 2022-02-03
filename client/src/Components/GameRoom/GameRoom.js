@@ -6,9 +6,10 @@ import ChatBox from './Chatbox/ChatBox';
 import PlayerContainer from './PlayerContainer/PlayerContainer';
 import Header from './Header/Header';
 import '../../Stylings/GameRoom.css'
+import Logo from '../Logo';
       
 
-function GameRoom({username}) {      
+function GameRoom({socket, setRoom}) {      
 
     const [utensil, SetUtensil] = useState({
         tool: "brush",
@@ -35,25 +36,30 @@ function GameRoom({username}) {
     }
 
     return (
-        <div className="container">
-            
-            <Header/>
+        <>
+            <div className="logo-header" onClick={()=>setRoom("home")}>
+                <Logo/>
+            </div>
+            <div className="container">
+                
+                <Header/>
 
-            <div id = "middle-section-gameroom">
-                <div>
-                    <PlayerContainer/>
+                <div id = "middle-section-gameroom">
+                    <div>
+                        <PlayerContainer/>
+                    </div>
+                    <div>
+                        <DrawingCanvas utensil={utensil}/>
+                    </div>
+                    <div>
+                        <ChatBox socket={socket}/>
+                    </div>
                 </div>
                 <div>
-                    <DrawingCanvas utensil={utensil}/>
-                </div>
-                <div>
-                    <ChatBox />
+                    <ToolBox handleUtensil={handleUtensil} utensil={utensil}/>
                 </div>
             </div>
-            <div>
-                <ToolBox handleUtensil={handleUtensil} utensil={utensil}/>
-            </div>
-        </div>
+        </>
     );
 }
 

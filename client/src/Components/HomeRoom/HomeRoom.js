@@ -1,69 +1,34 @@
 import React, {useEffect, useState} from 'react';
 import AvatarSelect from './AvatarSelect';
-import {FaPaintBrush} from "react-icons/fa";
 import {BsFillSuitHeartFill, BsGithub} from "react-icons/bs";
 import "../../Stylings/HomeRoom.css";
 import chat from "./chat.png"
 import * as style from '@dicebear/avatars-avataaars-sprites';
-import { v4 as uuidv4 } from 'uuid';
+import Logo from '../Logo';
 
 // Redux Elements
 import {useSelector, useDispatch} from "react-redux";
 import {updateUsername} from "../../Features/userReducer";
 
-function HomeRoom({setRoom, setGameId, setId}) {
+function HomeRoom({setRoom, socket}) {
     // Redux Elements
     const dispatch = useDispatch();
     const avatar = useSelector(state => state.avatar.value);
     const [username, setUsername] = useState('');
+    const [gameId, setGameId] = useState('');
     const [image, setImage] = useState(avatar.imageURL);
     const [funAlert, setFunAlert]=useState(0);
 
     const funMessages = ["Customizes your avatar!", "Look at me!", "I look so good",  "Look good, play good", "My dog will like this", "Let's kick some butt!", "A new look?", "Mirror mirror on the wall", "This is gonna work!", "I look amazing!", "Wow, what a look!", "Model award goes to...", "YES!! I like this!", "I'm the only ten I see!"];
 
-    function handleChange(event){
-        setUsername(()=> event.target.value)
-    }
-
     function handleSubmit(event){
         event.preventDefault();
-        dispatch(updateUsername({[username]: username}));
 
-        fetch('/users', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                name: username,
-                avatar: image,
-                points: 0,
-                isDrawing: false,
-                isLeader: true,
-            })
-        })
-        .then(res => res.json())
-        .then(data=>{
-            setId(()=>data.id)
-        })
-        
-        if(event.nativeEvent.submitter.name === "public"){
-            setRoom(()=>"game")
-        } else {
-            fetch('/gamerooms', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body:JSON.stringify({
-                    name: uuidv4()
-                })
-            })
-            .then(res => res.json())
-            .then(data=>{
-                setGameId(()=>data.id)
-                setRoom(()=>"private")
-            })
+        if (username !== "" && gameId !== "") {
+            dispatch(updateUsername({"username": username, "gameId": gameId}));
+            setRoom(()=>"private");
+            socket.emit("join_room", gameId);
+            console.log(socket)
         }
     }
     
@@ -82,22 +47,7 @@ function HomeRoom({setRoom, setGameId, setId}) {
     
     return (
         <div className="App">
-            <header id="homepage-header">
-                <h1 id="rainbow-title">
-                    <span>S</span>
-                    <span>a</span>
-                    <span>m</span>
-                    <span>r</span>
-                    <span>i</span>
-                    <span>c</span>
-                    <span>.</span>
-                    <span>i</span>
-                    <span>o</span>
-                    &nbsp;
-                    <FaPaintBrush id="paintbrush"/>
-                </h1>
-            </header>
-
+            <Logo/>
             <main id="homepage-main">
                 <form id="character-creation" className="homepage-containers" onSubmit={event=> handleSubmit(event)}>
                     <label>
@@ -109,9 +59,21 @@ function HomeRoom({setRoom, setGameId, setId}) {
                             minLength={1}
                             maxLength={32}
                             required
-                            onChange={handleChange}
-                        >
-                        </input>
+                            value={username}
+                            onChange={e=>setUsername(e.target.value)}
+                        />
+                        <input
+                            type="text"
+                            name="name-input"
+                            placeholder="Room ID..."
+                            autoComplete="off"
+                            minLength={1}
+                            maxLength={32}
+                            value={gameId}
+                            required
+                            onChange={e=>setGameId(e.target.value)}
+                        />
+                        
                     </label>
                     <div id="avatar-container">
                         <img id="avatar-image" src={image} alt="Avatar"/>
@@ -129,15 +91,8 @@ function HomeRoom({setRoom, setGameId, setId}) {
                             type="submit"
                             id="play-button"
                             className="homepage-button"
-                            name="public"
+                            name="settings"
                             value="Play!"
-                        />
-                        <input
-                            type="submit"
-                            id="private-button"
-                            className="homepage-button"
-                            name="private"
-                            value="Create a private room"
                         />
                     </div>
                 </form>

@@ -43,14 +43,7 @@ function Settings({setDrawTime, setRounds, setRoom}) {
                     </select>
                </div>
 
-               <div className="lobby-details-container">
-                    <p><strong>Custom Words</strong></p>
-                    <textarea id='textarea' placeholder='Type your custom words here separated by a comma. (Minimum of 4 words, maximum of 30 characters per word.)'></textarea>
-               </div>
-
-                <input id="checkbox" type="checkbox" name="exclusive"/><span id="checkbox-text">Use custom words exculsively.</span>
-
-                <button id="start-custom-button">Start Game</button>
+                <button id="start-custom-button" onClick={()=>setRoom("game")}>Start Game</button>
            </form>
        </div>
     );
