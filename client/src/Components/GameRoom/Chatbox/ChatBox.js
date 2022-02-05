@@ -6,17 +6,17 @@ function ChatBox({socket}) {
 
     const [currentMessage, setCurrentMessage] = useState("");
     const [messageList, setMessageList] = useState([]);
-    const room = useSelector(state => state.user.value.gameId);
+    const gameId = useSelector(state => state.user.value.gameId);
     const username = useSelector(state => state.user.value.username);
+    
+    const messageData = {
+      gameId: gameId,
+      author: username,
+      message: currentMessage,
+    };
 
     const sendMessage = async () => {
         if (currentMessage !== "") {
-          const messageData = {
-            room: room,
-            author: username,
-            message: currentMessage,
-          };
-    
           await socket.emit("send_message", messageData);
           setMessageList((list) => [...list, messageData]);
           setCurrentMessage("");
@@ -27,6 +27,8 @@ function ChatBox({socket}) {
         socket.on("receive_message", (data) => {
           setMessageList((list) => [...list, data]);
         });
+
+        socket.emit("join_private_room", messageData); 
       }, [socket]);
 
     return (

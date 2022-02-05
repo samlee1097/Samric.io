@@ -12,7 +12,7 @@ function PrivateRoomPlayers({userList}) {
        <div className="settings-container">
            <h2 className='private-room-title'>Players</h2>
            <div id="players-grid">
-                {listOfPlayers}
+                {userList.length !== 0 ? listOfPlayers : null}
            </div>
        </div>
     );

@@ -10,7 +10,7 @@ import Logo from '../Logo';
 import {useSelector, useDispatch} from "react-redux";
 import {updateUsername} from "../../Features/userReducer";
 
-function HomeRoom({setRoom, socket, setUserList, socketId}) {
+function HomeRoom({setRoom, socket, socketId}) {
     // Redux Elements
     const dispatch = useDispatch();
     const avatar = useSelector(state => state.avatar.value);
@@ -27,9 +27,7 @@ function HomeRoom({setRoom, socket, setUserList, socketId}) {
         avatar: image,
         id: socketId
     }
-    socket.on("broadcast", (data) => {
-        setUserList(()=> data.user_list);
-    });
+    
 
     async function handleSubmit(event){
         event.preventDefault();

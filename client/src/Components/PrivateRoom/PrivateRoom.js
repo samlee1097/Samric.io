@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Settings from './Settings';
 import InviteFriends from './InviteFriends';
 import '../../Stylings/PrivateRoom.css';
@@ -12,16 +12,14 @@ function PrivateRoom({setDrawTime, setRounds, setRoom, gameId, userList, socket,
         gameId: gameId,
     }
 
-
     function handleClick(){
         socket.emit("user_left", userData);
-        socket.on("remove_user", (data) => {
-            setUserList((list)=> list.filter(user => user.id !== data.socket_id));
-            console.log("removed user", data)
-        });
         setRoom(()=>"home");
-        
     }
+
+    socket.on("broadcast", (data) => {
+        setUserList(()=> data);
+    });
 
     return (
         <>  
