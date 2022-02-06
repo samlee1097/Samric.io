@@ -5,7 +5,7 @@ import '../../Stylings/PrivateRoom.css';
 import PrivateRoomPlayers from './PrivateRoomPlayers';
 import Logo from '../Logo';
 
-function PrivateRoom({setDrawTime, setRounds, setRoom, gameId, userList, socket, username, setUserList}) {
+function PrivateRoom({setDrawTime, setRounds, setRoom, gameId, userList, socket, username}) {
     
     const userData = {
         username: username,
@@ -17,9 +17,6 @@ function PrivateRoom({setDrawTime, setRounds, setRoom, gameId, userList, socket,
         setRoom(()=>"home");
     }
 
-    socket.on("broadcast", (data) => {
-        setUserList(()=> data);
-    });
 
     return (
         <>  

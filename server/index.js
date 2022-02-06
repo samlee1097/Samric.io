@@ -21,7 +21,7 @@ io.on("connection", (socket) => {
   socket.on("join_private_room", (data) => {
     socket.join(data.gameId);
     clients.push({avatar: data.avatar, username: data.username, id: socket.id});
-    socket.emit("broadcast", clients);
+    socket.to(data.gameId).emit("broadcast", clients);
   });
 
   socket.on("send_message", (data) => {

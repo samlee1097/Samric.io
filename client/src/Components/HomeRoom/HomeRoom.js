@@ -10,7 +10,7 @@ import Logo from '../Logo';
 import {useSelector, useDispatch} from "react-redux";
 import {updateUsername} from "../../Features/userReducer";
 
-function HomeRoom({setRoom, socket, socketId}) {
+function HomeRoom({setRoom, socket, socketId, setUserList}) {
     // Redux Elements
     const dispatch = useDispatch();
     const avatar = useSelector(state => state.avatar.value);
@@ -27,17 +27,23 @@ function HomeRoom({setRoom, socket, socketId}) {
         avatar: image,
         id: socketId
     }
-    
 
     async function handleSubmit(event){
         event.preventDefault();
 
         if (usernameEntry !== "" && gameId !== "") {      
             dispatch(updateUsername({"username": usernameEntry, "gameId": gameId}));
+            await socket.emit("join_private_room", userData);
+            setUserList((list)=> [...list, userData])
             setRoom(()=>"private");
-            await socket.emit("join_private_room", userData); 
         }
     }
+
+    useEffect(()=> {
+        socket.on("broadcast", (data) => {
+            setUserList(()=> data);
+        });
+    }, [socket])
 
     // Image URL
     const property = style.schema.properties;
@@ -56,7 +62,7 @@ function HomeRoom({setRoom, socket, socketId}) {
         <div className="App">
             <Logo/>
             <main id="homepage-main">
-                <form id="character-creation" className="homepage-containers" onSubmit={event=> handleSubmit(event)}>
+                <form id="character-creation" className="homepage-containers" onSubmit={event=> handleSubmit(event)} onKeyPress={e => e.key === "Enter" && handleSubmit(e)}>
                     <label>
                         <input
                             type="text"
@@ -64,7 +70,7 @@ function HomeRoom({setRoom, socket, socketId}) {
                             placeholder="Enter your name :^)"
                             autoComplete="off"
                             minLength={1}
-                            maxLength={32}
+                            maxLength={15}
                             required
                             value={usernameEntry}
                             onChange={e=>setUsername(e.target.value)}
@@ -75,7 +81,7 @@ function HomeRoom({setRoom, socket, socketId}) {
                             placeholder="Room ID..."
                             autoComplete="off"
                             minLength={1}
-                            maxLength={32}
+                            maxLength={10}
                             value={gameId}
                             required
                             onChange={e=>setGameId(e.target.value)}

@@ -23,7 +23,7 @@ function App() {
 
 
   return (
-    room === "home" ? <HomeRoom setRoom={setRoom} socket={socket} setSocketId={setSocketId} socketId={socketId} /> : room === "game" ? <GameRoom setRoom={setRoom} username={username} gameId={gameId} socket={socket}/> : <PrivateRoom socket={socket} userList={userList} setRoom={setRoom} gameId={gameId} username={username} socketId={socketId} setUserList={setUserList}/>
+    room === "home" ? <HomeRoom setRoom={setRoom} socket={socket} setSocketId={setSocketId} socketId={socketId} setUserList={setUserList}/> : room === "game" ? <GameRoom setRoom={setRoom} username={username} gameId={gameId} socket={socket}/> : <PrivateRoom socket={socket} userList={userList} setRoom={setRoom} gameId={gameId} username={username} socketId={socketId} setUserList={setUserList}/>
   );
 }
 
