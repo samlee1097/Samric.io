@@ -2,10 +2,10 @@ import React from 'react';
 import './Logo.css'
 import {FaPaintBrush} from "react-icons/fa";
 
-function Logo() {
+function Logo({handleClick}) {
     return (
        <div>
-            <header id="homepage-header">
+            <header id="homepage-header" onClick={handleClick}>
                 <h1 id="rainbow-title">
                     <span>S</span>
                     <span>a</span>

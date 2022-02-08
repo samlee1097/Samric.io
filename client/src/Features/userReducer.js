@@ -7,7 +7,8 @@ export const userSlice = createSlice({
     initialState: {
         value: {
             username: "", 
-            gameId: "" 
+            gameId: "",
+            socketId: ""
         }
     },
 

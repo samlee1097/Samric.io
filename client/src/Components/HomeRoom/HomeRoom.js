@@ -20,28 +20,29 @@ function HomeRoom({setRoom, socket, socketId, setUserList}) {
     const [funAlert, setFunAlert]=useState(0);
  
     const funMessages = ["Customizes your avatar!", "Look at me!", "I look so good",  "Look good, play good", "My dog will like this", "Let's kick some butt!", "A new look?", "Mirror mirror on the wall", "This is gonna work!", "I look amazing!", "Wow, what a look!", "Model award goes to...", "YES!! I like this!", "I'm the only ten I see!"];
-   
-    const userData = {
-        username: usernameEntry,
-        gameId: gameId,
-        avatar: image,
-        id: socketId
-    }
 
-    async function handleSubmit(event){
+    function handleSubmit(event){
+        const userData = {
+            username: usernameEntry,
+            gameId: gameId,
+            avatar: image,
+            socketId: socketId
+        }
+
         event.preventDefault();
 
         if (usernameEntry !== "" && gameId !== "") {      
-            dispatch(updateUsername({"username": usernameEntry, "gameId": gameId}));
-            await socket.emit("join_private_room", userData);
-            setUserList((list)=> [...list, userData])
             setRoom(()=>"private");
+            socket.emit("join_private_room", gameId);
+            dispatch(updateUsername({"username": usernameEntry, "gameId": gameId, "socketId": socketId}));
+            socket.emit("display_new_user", userData);
+            setUserList((list)=> [...list, userData]);
         }
     }
 
     useEffect(()=> {
         socket.on("broadcast", (data) => {
-            setUserList(()=> data);
+            setUserList((list)=> [...list, data]);
         });
     }, [socket])
 

@@ -1,27 +1,28 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Settings from './Settings';
 import InviteFriends from './InviteFriends';
 import '../../Stylings/PrivateRoom.css';
 import PrivateRoomPlayers from './PrivateRoomPlayers';
 import Logo from '../Logo';
 
-function PrivateRoom({setDrawTime, setRounds, setRoom, gameId, userList, socket, username}) {
+function PrivateRoom({setDrawTime, setUserList, setRounds, setRoom, gameId, userList, socket, username}) {
     
     const userData = {
         username: username,
         gameId: gameId,
+        socketId: socket.id
     }
 
     function handleClick(){
-        socket.emit("user_left", userData);
         setRoom(()=>"home");
+        setUserList(list => list.filter(user => user.socketId !== userData.socketId));
+        socket.emit("disconnect");
     }
-
 
     return (
         <>  
-            <div className='logo-header' onClick={handleClick}>
-                <Logo/>
+            <div className='logo-header'>
+                <Logo handleClick={handleClick}/>
             </div>
             <div id="private-room-top">
                 <Settings setDrawTime={setDrawTime} setRounds={setRounds} setRoom={setRoom}/>
