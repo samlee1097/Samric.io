@@ -18,10 +18,16 @@ io.on("connection", (socket) => {
   
   socket.on("join_private_room", (data) => {
     socket.join(data);
+    var clients = io.sockets.clients();
+    socket.emit('getCount', clients)
   });
 
   socket.on("display_new_user", (data) => {
     socket.to(data.gameId).emit("broadcast", data);
+  })
+
+  socket.on("remove_user", (data) => {
+    socket.to(data.gameId).emit("filter_users", data.socketId);
   })
 
   socket.on("send_message", (data) => {
