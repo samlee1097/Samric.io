@@ -32,20 +32,16 @@ function HomeRoom({setRoom, socket, setUserList}) {
         event.preventDefault();
 
         if (usernameEntry !== "" && gameId !== "") {      
-            socket.emit("join_private_room", gameId);
+            socket.emit("join_private_room", userData);
             setRoom(()=>"private");
             dispatch(updateUsername({"username": usernameEntry, "gameId": gameId, "socketId": socket.id}));
-            socket.emit("display_new_user", userData);
             setUserList((list)=> [...list, userData]);
         }
     }
 
     useEffect(()=> {
-        socket.on("broadcast", (data) => {
-            setUserList((list)=> [...list, data]);
-        });
-        socket.on("getCount", (data) => {
-            console.log(data)
+        socket.on("display_user", (data) => {
+            setUserList(()=> data)
         })
     }, [socket])
 

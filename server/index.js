@@ -14,20 +14,33 @@ const io = new Server(server, {
   },
 });
 
+let userList = {};
+
 io.on("connection", (socket) => {
   
   socket.on("join_private_room", (data) => {
-    socket.join(data);
-    var clients = io.sockets.clients();
-    socket.emit('getCount', clients)
+  
+    if(userList[data.gameId] === undefined){
+      userList[data.gameId] = [data];
+    } else {
+      userList[data.gameId].push(data)
+    }
+
+    socket.join(data.gameId);
+    socket.to(data.gameId).emit('display_user', userList[data.gameId]);
   });
 
-  socket.on("display_new_user", (data) => {
-    socket.to(data.gameId).emit("broadcast", data);
-  })
 
   socket.on("remove_user", (data) => {
-    socket.to(data.gameId).emit("filter_users", data.socketId);
+    if(userList[data.gameId]){ 
+      const index = userList[data.gameId].findIndex(user => user.socketId === data.socketId);
+
+      if(index !== -1){
+        userList[data.gameId].splice(index, 1);
+        console.log("removed user")
+      }
+      socket.to(data.gameId).emit("filter_users", userList[data.gameId]);
+    }
   })
 
   socket.on("send_message", (data) => {
