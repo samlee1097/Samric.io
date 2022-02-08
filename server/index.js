@@ -21,7 +21,7 @@ io.on("connection", (socket) => {
   socket.on("join_private_room", (data) => {
   
     if(userList[data.gameId] === undefined){
-      userList[data.gameId] = [data];
+      userList[data.gameId] = data;
     } else {
       userList[data.gameId].push(data)
     }
