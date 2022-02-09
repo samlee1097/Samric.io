@@ -35,12 +35,13 @@ function HomeRoom({setRoom, socket, setUserList}) {
             socket.emit("join_private_room", userData);
             setRoom(()=>"private");
             dispatch(updateUsername({"username": usernameEntry, "gameId": gameId, "socketId": socket.id}));
-            setUserList((list)=> [...list, userData]);
+            // setUserList((list)=> [...list, userData]);
         }
     }
 
     useEffect(()=> {
         socket.on("display_user", (data) => {
+            console.log("I am showing all new users")
             setUserList(()=> data)
         })
     }, [socket])
