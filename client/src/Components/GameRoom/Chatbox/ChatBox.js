@@ -26,9 +26,7 @@ function ChatBox({socket}) {
     useEffect(() => {
         socket.on("receive_message", (data) => {
           setMessageList((list) => [...list, data]);
-        });
-
-        socket.emit("join_private_room", messageData); 
+        }); 
       }, [socket]);
 
     return (

@@ -24,7 +24,7 @@ io.on("connection", (socket) => {
     if(userList[data.gameId] === undefined || userList[data.gameId].length === 0){
       userList[data.gameId] = [{...data, owner: true}];
     } else {
-      userList[data.gameId].push(data)
+      userList[data.gameId].push(data);
     }
     console.log(userList[data.gameId])
     socket.to(data.gameId).emit('display_user', userList[data.gameId]);
@@ -39,7 +39,7 @@ io.on("connection", (socket) => {
         userList[data.gameId].splice(index, 1);
         console.log("removed user", userList[data.gameId])
       }
-      socket.to(data.gameId).emit('display_user', userList[data.gameId]);
+      socket.to(data.gameId).emit('filter_users', userList[data.gameId]);
     }
   })
 

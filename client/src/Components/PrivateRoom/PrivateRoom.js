@@ -15,6 +15,9 @@ function PrivateRoom({setDrawTime, setUserList, setRounds, setRoom, gameId, user
     
     useEffect(()=> {
         setSocketId(() => socket.id);
+        socket.on("filter_users", (data) => {
+            setUserList(()=> data)
+        });
     }, [socket])
 
     function handleClick(){
