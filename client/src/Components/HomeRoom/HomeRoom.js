@@ -21,27 +21,29 @@ function HomeRoom({setRoom, socket, setUserList}) {
  
     const funMessages = ["Customizes your avatar!", "Look at me!", "I look so good",  "Look good, play good", "My dog will like this", "Let's kick some butt!", "A new look?", "Mirror mirror on the wall", "This is gonna work!", "I look amazing!", "Wow, what a look!", "Model award goes to...", "YES!! I like this!", "I'm the only ten I see!"];
 
-    async function handleSubmit(event){
-        const userData = {
-            username: usernameEntry,
-            gameId: gameId,
-            avatar: image,
-            socketId: socket.id
-        }
+    const userData = {
+        username: usernameEntry,
+        gameId: gameId,
+        avatar: image,
+        socketId: socket.id
+    }
 
+    function handleSubmit(event){
         event.preventDefault();
 
         if (usernameEntry !== "" && gameId !== "") {      
-            await socket.emit("join_private_room", userData);
-            setRoom(()=>"private");
+            socket.emit("join_private_room", userData);
+            setRoom(()=>"game");
             dispatch(updateUsername({"username": usernameEntry, "gameId": gameId, "socketId": socket.id}));
+            setUserList((list) => [...list, userData]);
+            console.log(userData)
         }
     }
+
     useEffect(()=> {
         socket.on("display_user", (data) => {
-            console.log(data)
-            setUserList(()=> data)
-        })
+            setUserList((list)=> [...list, data]);
+        });
     }, [socket])
 
     // Image URL

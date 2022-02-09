@@ -3,13 +3,12 @@ import React, {useState} from 'react';
 import ToolBox from './Canvas/ToolBox';
 import DrawingCanvas from './Canvas/DrawingCanvas'
 import ChatBox from './Chatbox/ChatBox';
-import PlayerContainer from './PlayerContainer/PlayerContainer';
+import PlayerList from './PlayerContainer/PlayerList';
 import Header from './Header/Header';
 import '../../Stylings/GameRoom.css'
 import Logo from '../Logo';
-      
 
-function GameRoom({socket, setRoom}) {      
+function GameRoom({socket, setRoom, userList}) {      
 
     const [utensil, SetUtensil] = useState({
         tool: "brush",
@@ -35,10 +34,16 @@ function GameRoom({socket, setRoom}) {
             }
     }
 
+    function handleClick(){
+        setRoom(()=>"home");
+        socket.disconnect();
+        window.location.reload();
+    }
+
     return (
         <>
-            <div className="logo-header" onClick={()=>setRoom("home")}>
-                <Logo/>
+            <div className='logo-header'>
+                <Logo handleClick={handleClick}/>
             </div>
             <div className="container">
                 
@@ -46,7 +51,7 @@ function GameRoom({socket, setRoom}) {
 
                 <div id = "middle-section-gameroom">
                     <div>
-                        <PlayerContainer/>
+                        <PlayerList userList={userList}/>
                     </div>
                     <div>
                         <DrawingCanvas utensil={utensil}/>

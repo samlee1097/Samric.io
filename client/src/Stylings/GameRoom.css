@@ -264,3 +264,26 @@
 .message:nth-child(even){
     background-color: rgba(192, 192, 192, 0.384);
 }
+
+.avatar-container{
+    max-width: 190px;
+    max-height: 100px;
+    margin: 2px 0px;
+}
+
+.avatar-room-image{
+    height: 60px;
+    padding-left: 5px;
+}
+
+.username-room{
+    width: 120px;
+    height: 60px;
+    font-size: 15px;
+    float: right;
+    top: 30px;
+    padding-top: 20px;
+    padding-left: 5px;
+    text-align: left;
+    font-family: 'Mochiy Pop P One', sans-serif;
+}

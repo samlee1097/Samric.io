@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { io } from 'socket.io-client';
 import GameRoom from "./Components/GameRoom/GameRoom";
 import HomeRoom from "./Components/HomeRoom/HomeRoom"
-import PrivateRoom from "./Components/PrivateRoom/PrivateRoom";
 
 const socket = io.connect("http://localhost:3001");
 
@@ -16,7 +15,7 @@ function App() {
   const [socketId, setSocketId] = useState(socket.id);
 
   return (
-    room === "home" ? <HomeRoom setRoom={setRoom} socket={socket} socketId={socketId} setUserList={setUserList}/> : room === "game" ? <GameRoom setRoom={setRoom} username={username} gameId={gameId} socket={socket}/> : <PrivateRoom setSocketId={setSocketId} socket={socket} userList={userList} setRoom={setRoom} gameId={gameId} username={username} socketId={socketId} setUserList={setUserList}/>
+    room === "home" ? <HomeRoom setRoom={setRoom} socket={socket} socketId={socketId} setUserList={setUserList}/> : <GameRoom userList={userList} gameId={gameId} setRoom={setRoom} username={username} setSocketId={setSocketId} gameId={gameId} socket={socket} setUserList={setUserList}/>
   );
 }
 

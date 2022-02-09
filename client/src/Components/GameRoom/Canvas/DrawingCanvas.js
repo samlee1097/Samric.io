@@ -16,6 +16,10 @@ function DrawingCanvas({utensil}) {
     const contextRef = useRef(null)
     const [isDrawing, setIsDrawing] = useState(false)
 
+    // const cavnasId = document.getElementById('canvas');
+    // const dataURLstring = cavnasId?.toDataURL();
+    // console.log(dataURLstring)
+
     useEffect(()=> {
         const canvas = canvasRef.current;
         canvas.width = 1600;
