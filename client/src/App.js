@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import { useSelector } from 'react-redux';
 import { io } from 'socket.io-client';
 import GameRoom from "./Components/GameRoom/GameRoom";
@@ -14,10 +14,9 @@ function App() {
   const username = useSelector(state => state.user.value.username);
   const [userList, setUserList] = useState([]);
   const [socketId, setSocketId] = useState(socket.id);
-  
-  
+
   return (
-    room === "home" ? <HomeRoom setRoom={setRoom} socket={socket} socketId={socketId} setUserList={setUserList}/> : room === "game" ? <GameRoom setRoom={setRoom} username={username} gameId={gameId} socket={socket}/> : <PrivateRoom setSocketId={setSocketId} setUserList={setUserList} socket={socket} userList={userList} setRoom={setRoom} gameId={gameId} username={username} socketId={socketId} setUserList={setUserList}/>
+    room === "home" ? <HomeRoom setRoom={setRoom} socket={socket} socketId={socketId} setUserList={setUserList}/> : room === "game" ? <GameRoom setRoom={setRoom} username={username} gameId={gameId} socket={socket}/> : <PrivateRoom setSocketId={setSocketId} socket={socket} userList={userList} setRoom={setRoom} gameId={gameId} username={username} socketId={socketId} setUserList={setUserList}/>
   );
 }
 

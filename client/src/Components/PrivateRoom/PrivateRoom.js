@@ -25,6 +25,11 @@ function PrivateRoom({setDrawTime, setUserList, setRounds, setRoom, gameId, user
         setUserList((list)=> list.filter(user => user.socketId !== socket.id));
         socket.emit("remove_user", userData);
     }
+  
+    window.onbeforeunload = function () {
+        socket.emit("disconnect", userData);
+        console.log("I am being ran");
+    }
 
     return (
         <>  

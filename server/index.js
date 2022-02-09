@@ -19,14 +19,13 @@ let userList = {};
 io.on("connection", (socket) => {
   
   socket.on("join_private_room", (data) => {
-  
+    socket.join(data.gameId);  
+
     if(userList[data.gameId] === undefined){
-      userList[data.gameId] = data;
+      userList[data.gameId] = [{...data, owner: true}];
     } else {
       userList[data.gameId].push(data)
     }
-
-    socket.join(data.gameId);
     socket.to(data.gameId).emit('display_user', userList[data.gameId]);
   });
 
@@ -47,7 +46,8 @@ io.on("connection", (socket) => {
     socket.to(data.gameId).emit("receive_message", data);
   });
 
-  socket.on("disconnect", () => {
+  socket.on("disconnect", (data) => {
+    socket.to(data.gameId).emit("filter_users", userList[data.gameId]);
     console.log("User Disconnected", socket.id);
   });
 });
