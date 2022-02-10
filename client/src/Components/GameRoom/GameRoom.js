@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 import ToolBox from './Canvas/ToolBox';
 import DrawingCanvas from './Canvas/DrawingCanvas'
@@ -7,9 +7,12 @@ import PlayerList from './PlayerContainer/PlayerList';
 import Header from './Header/Header';
 import '../../Stylings/GameRoom.css'
 import Logo from '../Logo';
+import ScrollToBottom from "react-scroll-to-bottom";
 
 function GameRoom({socket, setRoom, userList}) {      
 
+    const [currentMessage, setCurrentMessage] = useState("");
+    const [messageList, setMessageList] = useState([]);
     const [utensil, SetUtensil] = useState({
         tool: "brush",
         weight: 5,
@@ -46,18 +49,16 @@ function GameRoom({socket, setRoom, userList}) {
                 <Logo handleClick={handleClick}/>
             </div>
             <div className="container">
-                
                 <Header/>
-
                 <div id = "middle-section-gameroom">
                     <div>
                         <PlayerList userList={userList}/>
                     </div>
                     <div>
-                        <DrawingCanvas utensil={utensil}/>
+                        <DrawingCanvas utensil={utensil} socket={socket} setCurrentMessage={setCurrentMessage} setMessageList={setMessageList}/>
                     </div>
                     <div>
-                        <ChatBox socket={socket}/>
+                        <ChatBox socket={socket} currentMessage={currentMessage} setCurrentMessage={setCurrentMessage} setMessageList={setMessageList} messageList={messageList}/>
                     </div>
                 </div>
                 <div>

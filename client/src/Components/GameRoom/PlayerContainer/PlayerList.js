@@ -1,7 +1,6 @@
 import React from 'react';
 
 function PlayerList({userList}) {
-    console.log(userList)
     const listOfPlayers = userList?.map(data => 
         <div className='avatar-container'>
             <img className='avatar-room-image' src={data.avatar}/>

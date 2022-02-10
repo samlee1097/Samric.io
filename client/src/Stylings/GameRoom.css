@@ -85,6 +85,7 @@
     margin: 0 auto;
     left: -100px;
     position: relative;
+    top: -30px;
 }
 
 #tool-box > div{
@@ -108,8 +109,8 @@
     cursor: pointer;
 
     position: absolute;
-    right: 345px;
-    bottom: 0;
+    right: 350px;
+    bottom: 30px;
 
     color: rgb(133, 133, 133);
 }
@@ -286,4 +287,18 @@
     padding-left: 5px;
     text-align: left;
     font-family: 'Mochiy Pop P One', sans-serif;
+}
+
+#share-image-button{
+    height: 30px;
+    min-width: 200px;
+    position: relative;
+    left: 805px;
+}
+
+.image-sent{
+    max-width: 290px;
+    transform: scale(0.95);
+    border: 1px solid black;
+    background-color: white;
 }

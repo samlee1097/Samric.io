@@ -2,10 +2,8 @@ import React, { useEffect, useState} from 'react';
 import ScrollToBottom from "react-scroll-to-bottom";
 import { useSelector } from 'react-redux';
 
-function ChatBox({socket}) {
+function ChatBox({socket, currentMessage, setCurrentMessage, messageList, setMessageList}) {
 
-    const [currentMessage, setCurrentMessage] = useState("");
-    const [messageList, setMessageList] = useState([]);
     const gameId = useSelector(state => state.user.value.gameId);
     const username = useSelector(state => state.user.value.username);
     
@@ -37,7 +35,7 @@ function ChatBox({socket}) {
               <div className="message">
                 <div>
                   <div className="message-content">
-                    <p><strong>{messageContent.author}</strong>: {messageContent.message}</p>
+                  {messageContent.message.length < 25 ? <p><strong>{messageContent.author}</strong>: {messageContent.message}</p> : <p><strong>{messageContent.author}</strong>: <img className="image-sent" src={messageContent.message} alt="sent image"/></p>}
                   </div>
                 </div>
               </div>

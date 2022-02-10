@@ -1,8 +1,10 @@
 import React, {useState, useRef, useEffect } from 'react';
 import {BsTrash} from 'react-icons/bs'
 import FloodFill from 'q-floodfill'
+import { useSelector } from 'react-redux';
 
-function DrawingCanvas({utensil}) {
+
+function DrawingCanvas({utensil, socket, setMessageList, setCurrentMessage}) {
     const {tool, weight, color} = utensil;
     const magic = {
         width: "800px",
@@ -15,10 +17,6 @@ function DrawingCanvas({utensil}) {
     const canvasRef = useRef(null)
     const contextRef = useRef(null)
     const [isDrawing, setIsDrawing] = useState(false)
-
-    // const cavnasId = document.getElementById('canvas');
-    // const dataURLstring = cavnasId?.toDataURL();
-    // console.log(dataURLstring)
 
     useEffect(()=> {
         const canvas = canvasRef.current;
@@ -90,7 +88,27 @@ function DrawingCanvas({utensil}) {
     }
 
     function resetCanvas(){
-        canvasRef.current.getContext("2d").clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+        canvasRef.current.getContext("2d").fillStyle="white";
+        canvasRef.current.getContext("2d").fillRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+
+    }
+
+    const gameId = useSelector(state => state.user.value.gameId);
+    const username = useSelector(state => state.user.value.username);
+
+    const cavnasId = document.getElementById('canvas');
+    const dataURLstring = cavnasId.toDataURL();
+
+    const messageData = {
+      gameId: gameId,
+      author: username,
+      message: dataURLstring,
+    };
+
+    function handleShareImage(){
+        socket.emit("send_message", messageData);
+        setMessageList((list) => [...list, messageData]);
+        setCurrentMessage("");
     }
 
     return (
@@ -103,6 +121,7 @@ function DrawingCanvas({utensil}) {
             />
             <div>
                 <button id="trash-icon" title="Clear the board" onClick={resetCanvas}><BsTrash className='react-icon-tool'/></button>
+                <button id="share-image-button" onClick={handleShareImage}>Share your image!</button>
             </div>
         </>
     );

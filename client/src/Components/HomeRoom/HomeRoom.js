@@ -28,21 +28,21 @@ function HomeRoom({setRoom, socket, setUserList}) {
         socketId: socket.id
     }
 
-    function handleSubmit(event){
+    async function handleSubmit(event){
         event.preventDefault();
 
         if (usernameEntry !== "" && gameId !== "") {      
-            socket.emit("join_private_room", userData);
+            socket.emit("join_private_room", gameId);
+            await socket.emit("add_new_user", userData);
+            setUserList(()=> [userData])
             setRoom(()=>"game");
             dispatch(updateUsername({"username": usernameEntry, "gameId": gameId, "socketId": socket.id}));
-            setUserList((list) => [...list, userData]);
-            console.log(userData)
         }
     }
 
-    useEffect(()=> {
+    useEffect(() => {
         socket.on("display_user", (data) => {
-            setUserList((list)=> [...list, data]);
+            setUserList(() => data);
         });
     }, [socket])
 
