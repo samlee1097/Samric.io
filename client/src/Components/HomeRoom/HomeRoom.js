@@ -28,12 +28,11 @@ function HomeRoom({setRoom, socket, setUserList}) {
         socketId: socket.id
     }
 
-    async function handleSubmit(event){
+    function handleSubmit(event){
         event.preventDefault();
 
         if (usernameEntry !== "" && gameId !== "") {      
-            socket.emit("join_private_room", gameId);
-            await socket.emit("add_new_user", userData);
+            socket.emit("join_private_room", userData);
             setUserList(()=> [userData])
             setRoom(()=>"game");
             dispatch(updateUsername({"username": usernameEntry, "gameId": gameId, "socketId": socket.id}));

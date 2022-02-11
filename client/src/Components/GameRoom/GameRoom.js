@@ -8,6 +8,7 @@ import Header from './Header/Header';
 import '../../Stylings/GameRoom.css'
 import Logo from '../Logo';
 import ScrollToBottom from "react-scroll-to-bottom";
+import { useSelector } from 'react-redux';
 
 function GameRoom({socket, setRoom, userList}) {      
 
@@ -18,6 +19,14 @@ function GameRoom({socket, setRoom, userList}) {
         weight: 5,
         color: "black"
     });
+    const gameId = useSelector(state => state.user.value.gameId);
+    const username = useSelector(state => state.user.value.username);
+
+    const userData = {
+        username: username,
+        gameId: gameId,
+        socketId: socket.id
+    }
 
     const [lastColor, setLastColor] = useState(utensil["color"]);    
 
@@ -39,8 +48,7 @@ function GameRoom({socket, setRoom, userList}) {
 
     function handleClick(){
         setRoom(()=>"home");
-        socket.disconnect();
-        window.location.reload();
+        socket.emit("user_leaves", userData);
     }
 
     return (

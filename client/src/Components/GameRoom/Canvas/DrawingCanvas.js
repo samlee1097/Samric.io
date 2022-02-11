@@ -90,14 +90,13 @@ function DrawingCanvas({utensil, socket, setMessageList, setCurrentMessage}) {
     function resetCanvas(){
         canvasRef.current.getContext("2d").fillStyle="white";
         canvasRef.current.getContext("2d").fillRect(0, 0, canvasRef.current.width, canvasRef.current.height);
-
     }
 
     const gameId = useSelector(state => state.user.value.gameId);
     const username = useSelector(state => state.user.value.username);
 
     const cavnasId = document.getElementById('canvas');
-    const dataURLstring = cavnasId.toDataURL();
+    const dataURLstring = cavnasId?.toDataURL();
 
     const messageData = {
       gameId: gameId,
