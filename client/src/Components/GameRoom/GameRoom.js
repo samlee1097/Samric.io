@@ -60,7 +60,7 @@ function GameRoom({socket, setRoom, userList}) {
                 <Header userList={userList}/>
                 <div id = "middle-section-gameroom">
                     <div>
-                        <PlayerList userList={userList}/>
+                        <PlayerList owner={userList}/>
                     </div>
                     <div>
                         <DrawingCanvas utensil={utensil} socket={socket} setCurrentMessage={setCurrentMessage} setMessageList={setMessageList}/>

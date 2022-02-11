@@ -1,7 +1,7 @@
 import React from 'react';
 import ScrollToBottom from "react-scroll-to-bottom";
 
-function PlayerList({userList, setRoomOwner}) {
+function PlayerList({userList}) {
     const listOfPlayers = userList?.map(data => 
         <div className='avatar-container'>
             <img className='avatar-room-image' src={data.avatar}/>
