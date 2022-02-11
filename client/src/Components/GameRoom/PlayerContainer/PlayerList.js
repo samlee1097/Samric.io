@@ -1,6 +1,7 @@
 import React from 'react';
+import ScrollToBottom from "react-scroll-to-bottom";
 
-function PlayerList({userList}) {
+function PlayerList({userList, setRoomOwner}) {
     const listOfPlayers = userList?.map(data => 
         <div className='avatar-container'>
             <img className='avatar-room-image' src={data.avatar}/>
@@ -9,11 +10,14 @@ function PlayerList({userList}) {
     )
 
     return (
-       <div id="gameroom-player-container">
+        <div id="gameroom-player-container">
+            <ScrollToBottom>
            <div id="players-grid">
                 {listOfPlayers ? listOfPlayers : null}
            </div>
+           </ScrollToBottom>
        </div>
+               
     );
 }
 export default PlayerList;

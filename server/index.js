@@ -21,12 +21,12 @@ io.on("connection", (socket) => {
   socket.on("join_private_room", (data) => {
     socket.join(data.gameId);  
 
-    if (userList[data.gameId]){
-      userList[data.gameId].push({...data, owner: true});
+    if (!userList[data.gameId] || userList[data.gameId].length === 0){
+      userList[data.gameId] = [{...data, owner: true}];
     } else {
-      userList[data.gameId] = [data];
+      userList[data.gameId].push(data);
     }
-
+    console.log(userList[data.gameId])
     io.to(data.gameId).emit('display_user', userList[data.gameId]);
   });
 
@@ -36,10 +36,8 @@ io.on("connection", (socket) => {
 
   socket.on("user_leaves", (data) => {
     socket.leave(data.gameId);
-    userList[data.gameId] = userList[data.gameId].filter((user) => user.socketId !== socket.id);
-    if (!userList[data.gameId].length) {
-      delete userList[data.gameId];
-   }
+    userList[data.gameId] = userList[data.gameId]?.filter((user) => user.socketId !== socket.id);
+
     console.log(userList[data.gameId])
     io.to(data.gameId).emit('display_user', userList[data.gameId]);
   })

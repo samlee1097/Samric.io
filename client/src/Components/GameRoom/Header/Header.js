@@ -1,13 +1,15 @@
-import React from 'react';
+import React, {} from 'react';
 
-import ShowWord from './ShowWord';
 
-function Header() {
+function Header({userList}) {
+
+    const owner = userList?.map(user => user.owner === true);
+    console.log(owner);
 
     return (
        <div id="gameroom-header">
            <div id="showword-div">
-                <ShowWord/>
+            
            </div>
        </div>
     );

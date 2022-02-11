@@ -7,7 +7,7 @@ import PlayerList from './PlayerContainer/PlayerList';
 import Header from './Header/Header';
 import '../../Stylings/GameRoom.css'
 import Logo from '../Logo';
-import ScrollToBottom from "react-scroll-to-bottom";
+
 import { useSelector } from 'react-redux';
 
 function GameRoom({socket, setRoom, userList}) {      
@@ -57,7 +57,7 @@ function GameRoom({socket, setRoom, userList}) {
                 <Logo handleClick={handleClick}/>
             </div>
             <div className="container">
-                <Header/>
+                <Header userList={userList}/>
                 <div id = "middle-section-gameroom">
                     <div>
                         <PlayerList userList={userList}/>
