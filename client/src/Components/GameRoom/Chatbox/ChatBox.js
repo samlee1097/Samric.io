@@ -47,7 +47,7 @@ function ChatBox({socket, currentMessage, setCurrentMessage, messageList, setMes
                 className='text-input-box'
                 type="text"
                 value={currentMessage}
-                placeholder="Type your guess..."
+                placeholder="Type your message..."
                 maxLength="25"
                 onChange={(event) => {
                     setCurrentMessage(event.target.value);

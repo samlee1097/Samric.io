@@ -58,7 +58,7 @@ function GameRoom({socket, setRoom, userList}) {
                 <Logo handleClick={handleClick}/>
             </div>
             <div className="container">
-                <Header userList={userList}/>
+                <Header owner={userList[0]}/>
                 <div id = "middle-section-gameroom">
                     <div>
                         <PlayerList userList={userList}/>

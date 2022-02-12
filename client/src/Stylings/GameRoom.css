@@ -302,3 +302,11 @@
     border: 1px solid black;
     background-color: white;
 }
+
+.owner-title{
+    font-family: 'Mochiy Pop P One', sans-serif;
+}
+
+.user-title{
+    color: rgb(35, 131, 241);
+}

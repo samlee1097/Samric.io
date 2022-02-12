@@ -78,11 +78,9 @@
     background: rgb(92, 184, 92);
     border-color: rgb(76, 174, 76);
 
-    padding: 10px 16px;
-    margin-top: 8px;
-
     font-size: 18px;
     line-height: 1.333333;
+    color: white;
 }
 
 #private-button {
@@ -157,6 +155,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-bottom: 20px;
 }
 
 footer div {

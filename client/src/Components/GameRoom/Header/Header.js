@@ -2,11 +2,10 @@ import React, {} from 'react';
 
 
 function Header({owner}) {
-    // console.log(owner)
     return (
        <div id="gameroom-header">
            <div id="showword-div">
-                <p>Welcome to {owner?.username}'s Room!</p>
+                <p className="owner-title">Welcome to <strong className='user-title'>{owner?.username}</strong> Room!</p>
            </div>
        </div>
     );

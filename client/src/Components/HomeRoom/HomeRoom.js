@@ -152,18 +152,13 @@ function HomeRoom({setRoom, socket, setUserList}) {
 
             <footer id="homepage-footer">
                 <div>
-                    <BsGithub style={{color: "white", fontSize: "18px"}}/> made by <a href="https://github.com/samlee1097" target="blank">@samlee1097</a> & <a href="https://github.com/Kanginyi" target="blank">@Kanginyi</a>
+                    <BsGithub style={{color: "white", fontSize: "18px"}}/> made by <a href="https://github.com/samlee1097" target="blank">@samlee1097</a>
                 </div>
 
                 <div>
                     <a href="#">Contact</a>&nbsp;
                     <a href="#">Terms of Service</a>&nbsp;
                     <a href="#">Credits</a>
-                </div>
-
-                <div>
-                    We are not responsible for any user generated content<br/>
-                    (drawings, messages, usernames)
                 </div>
             </footer>
             
