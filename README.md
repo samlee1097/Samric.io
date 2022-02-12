@@ -1,4 +1,4 @@
-# Samric.io
+# Sketch.io
  
 ## Table of contents
 * [Description](#general-info)
