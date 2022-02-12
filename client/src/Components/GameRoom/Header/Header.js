@@ -2,7 +2,7 @@ import React, {} from 'react';
 
 
 function Header({owner}) {
-    console.log(owner)
+    // console.log(owner)
     return (
        <div id="gameroom-header">
            <div id="showword-div">

@@ -19,6 +19,7 @@ function GameRoom({socket, setRoom, userList}) {
         weight: 5,
         color: "black"
     });
+
     const gameId = useSelector(state => state.user.value.gameId);
     const username = useSelector(state => state.user.value.username);
 
@@ -60,7 +61,7 @@ function GameRoom({socket, setRoom, userList}) {
                 <Header userList={userList}/>
                 <div id = "middle-section-gameroom">
                     <div>
-                        <PlayerList owner={userList}/>
+                        <PlayerList userList={userList}/>
                     </div>
                     <div>
                         <DrawingCanvas utensil={utensil} socket={socket} setCurrentMessage={setCurrentMessage} setMessageList={setMessageList}/>
