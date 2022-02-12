@@ -1,4 +1,4 @@
-# Optimum
+# Samric.io
  
 ## Table of contents
 * [Description](#general-info)
