@@ -26,13 +26,11 @@ Health & fitness app in which users analyze personalized data according to their
 
 ## Technologies
 
-- Ruby 2.7.4
+- Socket.io
 - NodeJS (v16), and npm
 - Heroku CLI
-- Postgresql
 - DiceBear API (for creating avatar)
-- React ChartJS
-- React
+- ReactJS
 
 <a name="setup"/>
 
@@ -41,14 +39,10 @@ Health & fitness app in which users analyze personalized data according to their
 Start by **forking** the project template repository and then clone the project:
 
 ```console
-$ git clone git@github.com:samlee1097/optimum.git
-$ cd optimum
-$ bundle install
-$ npm install --prefix client
-$ sudo service postgresql start
-$ rails s
-// new terminal
-$ npm start --prefix client
+$ git clone git@github.com:samlee1097/Samric.io.git
+$ cd Samric.io
+$ npm install && npm start --prefix server
+$ npm install && npm start --prefix client
 ```
 
 ## Design
@@ -61,7 +55,8 @@ $ npm start --prefix client
 
 ### Component Hierarcy
 
-![image](https://user-images.githubusercontent.com/87099910/146804057-655d4ee9-627b-42aa-a04c-2312c665fc5c.png)
+![image](https://user-images.githubusercontent.com/87099910/153726455-590bb6cc-4e10-4e03-b4b3-8e7502dd20ca.png)
+
 
 ### User Stories
 
