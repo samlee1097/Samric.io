@@ -8,11 +8,11 @@ function Logo({handleClick}) {
             <header id="homepage-header" onClick={handleClick}>
                 <h1 id="rainbow-title">
                     <span>S</span>
-                    <span>a</span>
-                    <span>m</span>
-                    <span>r</span>
-                    <span>i</span>
+                    <span>k</span>
+                    <span>e</span>
+                    <span>t</span>
                     <span>c</span>
+                    <span>h</span>
                     <span>.</span>
                     <span>i</span>
                     <span>o</span>
