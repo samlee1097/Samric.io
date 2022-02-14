@@ -27,7 +27,11 @@ Health & fitness app in which users analyze personalized data according to their
 ## Technologies
 
 - Socket.io
-- NodeJS (v16), and npm
+- NodeJS
+- JavaScript
+- HTML
+- CSS
+- Redux
 - Heroku CLI
 - DiceBear API (for creating avatar)
 - ReactJS
