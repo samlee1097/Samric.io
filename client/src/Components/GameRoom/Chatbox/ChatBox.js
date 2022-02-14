@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from 'react';
+import React, { useEffect} from 'react';
 import ScrollToBottom from "react-scroll-to-bottom";
 import { useSelector } from 'react-redux';
 
@@ -35,7 +35,7 @@ function ChatBox({socket, currentMessage, setCurrentMessage, messageList, setMes
               <div className="message">
                 <div>
                   <div className="message-content">
-                  {messageContent.message.length < 25 ? <p><strong>{messageContent.author}</strong>: {messageContent.message}</p> : <p><strong>{messageContent.author}</strong>: <img className="image-sent" src={messageContent.message} alt="sent image"/></p>}
+                  <p><strong>{messageContent.author}</strong>: {messageContent.message.length < 25 ? messageContent.message : <img className="image-sent" src={messageContent.message} alt="sent"/>}</p>
                   </div>
                 </div>
               </div>
