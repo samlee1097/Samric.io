@@ -29,8 +29,6 @@ Health & fitness app in which users analyze personalized data according to their
 - Socket.io
 - NodeJS
 - JavaScript
-- HTML
-- CSS
 - Redux
 - Heroku CLI
 - DiceBear API (for creating avatar)
