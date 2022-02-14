@@ -64,17 +64,12 @@ $ npm install && npm start --prefix client
 
 **MVP:**
 User will be able to:
-* Sign up by via username & password
-* Login if the user already has an account
-* Change a user’s avatar
-* Sign out of their account
-* See a “my profile” page with details/graphs from the inputs of all the logs created
-* Create a log for an activity/weight with notes
-* Delete their own posts once logged on
-* Log the level of happiness and health ranking so users can see a calendar/graph with the info
-
+* Join a specific room with username & room ID
+* Customize avatar before joining
+* Draw on a canvas with different tools/colors
+* Share canvas with others through the chat
+* Share live text and messages with others in the room
 
 **Stretch goals:**
-* See a list of all the achievements a player completed on their profile page
-* Have a player level system where each achievement is linked to a certain amount of experience
-* Follow other users to see their logs displayed on their home 
+* Have a game where users guess a word to get points
+* Allow users to automatically join public rooms without a room code
