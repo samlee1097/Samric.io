@@ -16,18 +16,21 @@ https://optimum-project.herokuapp.com/
 
 ## Description
 
-Health & fitness app in which users analyze personalized data according to their logged fitness activity 
+Live multiplayer drawing and chat app where users can join private rooms, interact with other users, and explore their creativity 
 
-* Modeled custom database schema and REST API with Active Record, PostgreSQL, and Ruby on Rails
 * Utilized DiceBear API to allow users to customize their avatars
-* Authenticated users at login by encrypting identifying account information via BCrypt
+* Integrated Canvas API as a means for drawing graphics via React, JavaScript, and the HTML canvas element.
+* Utilized Redux & Socket.io as a bidirectional & low-latency communication tool to interact with other users
+
 
 <a name="technologies"/>
 
 ## Technologies
 
 - Socket.io
-- NodeJS (v16), and npm
+- NodeJS
+- JavaScript
+- Redux
 - Heroku CLI
 - DiceBear API (for creating avatar)
 - ReactJS
@@ -62,17 +65,12 @@ $ npm install && npm start --prefix client
 
 **MVP:**
 User will be able to:
-* Sign up by via username & password
-* Login if the user already has an account
-* Change a user’s avatar
-* Sign out of their account
-* See a “my profile” page with details/graphs from the inputs of all the logs created
-* Create a log for an activity/weight with notes
-* Delete their own posts once logged on
-* Log the level of happiness and health ranking so users can see a calendar/graph with the info
-
+* Join a specific room with username & room ID
+* Customize avatar before joining
+* Draw on a canvas with different tools/colors
+* Share canvas with others through the chat
+* Share live text and messages with others in the room
 
 **Stretch goals:**
-* See a list of all the achievements a player completed on their profile page
-* Have a player level system where each achievement is linked to a certain amount of experience
-* Follow other users to see their logs displayed on their home 
+* Have a game where users guess a word to get points
+* Allow users to automatically join public rooms without a room code
