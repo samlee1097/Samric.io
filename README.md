@@ -16,11 +16,12 @@ https://optimum-project.herokuapp.com/
 
 ## Description
 
-Health & fitness app in which users analyze personalized data according to their logged fitness activity 
+Live multiplayer drawing and chat app where users can join private rooms, interact with other users, and explore their creativity 
 
-* Modeled custom database schema and REST API with Active Record, PostgreSQL, and Ruby on Rails
 * Utilized DiceBear API to allow users to customize their avatars
-* Authenticated users at login by encrypting identifying account information via BCrypt
+* Integrated Canvas API as a means for drawing graphics via React, JavaScript, and the HTML canvas element.
+* Utilized Redux & Socket.io as a bidirectional & low-latency communication tool to interact with other users
+
 
 <a name="technologies"/>
 
