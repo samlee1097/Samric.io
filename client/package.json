@@ -1,11 +1,7 @@
 {
-  "name": "skribblio-clone",
+  "name": "sketch-io",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:3000",
-  "engines": {
-    "node": "16.x"
-  },
   "dependencies": {
     "@dicebear/avatars": "^4.10.2",
     "@dicebear/avatars-avataaars-sprites": "^4.10.2",
