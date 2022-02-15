@@ -1,4 +1,4 @@
-import React, {createContext} from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
@@ -11,9 +11,6 @@ import avatarReducer from "./Features/avatarSprite";
 import settingReducer from "./Features/gameSettings";
 import userReducer from "./Features/userReducer";
 
-// Websockets
-import actionCable from 'actioncable';
-
 const store = configureStore({
     reducer: {
         avatar: avatarReducer,
@@ -22,18 +19,10 @@ const store = configureStore({
     }
 });
 
-// Create POST request on homeroom, grab the id from the homeroom, pass id to private room
-// ActionCable
-const CableApp = {};
-CableApp.cable = actionCable.createConsumer("wss://sketch-io.herokuapp.com/cable");
-export const ActionCableContext = createContext();
-
 ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>
-           <ActionCableContext.Provider value={CableApp.cable}>
-               <App />
-            </ActionCableContext.Provider>
+            <App />
         </Provider>
     </React.StrictMode>,
   document.getElementById('root')

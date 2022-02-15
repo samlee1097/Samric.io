@@ -7,7 +7,6 @@ import HomeRoom from "./Components/HomeRoom/HomeRoom"
 const socket = io.connect("https://sketch-io.herokuapp.com/");
 
 function App() { 
-  
   const [room, setRoom] = useState("home");
   const gameId = useSelector(state => state.user.value.gameId);
   const username = useSelector(state => state.user.value.username);
