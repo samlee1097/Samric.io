@@ -25,7 +25,7 @@ const store = configureStore({
 // Create POST request on homeroom, grab the id from the homeroom, pass id to private room
 // ActionCable
 const CableApp = {};
-CableApp.cable = actionCable.createConsumer("http://sketch-io.vercel.app");
+CableApp.cable = actionCable.createConsumer("https://sketch-io.vercel.app");
 export const ActionCableContext = createContext();
 
 ReactDOM.render(
