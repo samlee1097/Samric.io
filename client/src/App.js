@@ -4,7 +4,7 @@ import { io } from 'socket.io-client';
 import GameRoom from "./Components/GameRoom/GameRoom";
 import HomeRoom from "./Components/HomeRoom/HomeRoom"
 
-const socket = io.connect("https://sketch-io.herokuapp.com/");
+const socket = io.connect("/");
 
 function App() { 
   
