@@ -6,14 +6,6 @@ const { Server } = require("socket.io");
 const PORT = process.env.PORT || 3001;
 app.use(cors());
 
-if (process.env.NODE_ENV === 'production') {
-	app.use(express.static('client/build'));
-}
-
-app.get('*', (request, response) => {
-	response.sendFile(path.join(__dirname, './client/build', 'index.html'));
-});
-
 const server = http.createServer(app);
 
 const io = new Server(server, {
