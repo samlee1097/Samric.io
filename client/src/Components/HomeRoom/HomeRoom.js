@@ -92,7 +92,7 @@ function HomeRoom({setRoom, socket, setUserList}) {
                         <img id="avatar-image" src={image} alt="Avatar"/>
                     </div>
                     <div id="customize-avatar-message">
-                        <img id="edit-alert" src={chat}/>
+                        <img id="edit-alert" alt="edit" src={chat}/>
                         <p id="edit-alert-message">{funMessages[funAlert]}</p>
                     </div>
                     <div id="avatar-selection">
@@ -156,9 +156,9 @@ function HomeRoom({setRoom, socket, setUserList}) {
                 </div>
 
                 <div>
-                    <a href="#">Contact</a>&nbsp;
-                    <a href="#">Terms of Service</a>&nbsp;
-                    <a href="#">Credits</a>
+                    <a href="#conteact">Contact</a>&nbsp;
+                    <a href="#terms">Terms of Service</a>&nbsp;
+                    <a href="#credits">Credits</a>
                 </div>
             </footer>
             

@@ -15,7 +15,7 @@ function App() {
   const [socketId, setSocketId] = useState(socket.id);
   
   return (
-    room === "home" ? <HomeRoom setRoom={setRoom} socket={socket} socketId={socketId} setUserList={setUserList}/> : <GameRoom userList={userList} gameId={gameId} setRoom={setRoom} username={username} setSocketId={setSocketId} gameId={gameId} socket={socket} setUserList={setUserList}/>
+    room === "home" ? <HomeRoom setRoom={setRoom} socket={socket} socketId={socketId} setUserList={setUserList}/> : <GameRoom userList={userList} setRoom={setRoom} username={username} setSocketId={setSocketId} gameId={gameId} socket={socket} setUserList={setUserList}/>
   );
 }
 
