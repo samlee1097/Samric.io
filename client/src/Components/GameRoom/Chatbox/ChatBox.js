@@ -35,7 +35,7 @@ function ChatBox({socket, currentMessage, setCurrentMessage, messageList, setMes
               <div className="message">
                 <div>
                   <div className="message-content">
-                  <p><strong>{messageContent.author}</strong>: {messageContent.message.length < 25 ? messageContent.message : <img className="image-sent" src={messageContent.message} alt="sent"/>}</p>
+                  <p><strong>{messageContent.author}</strong>: {messageContent.message?.length < 25 ? messageContent.message : <img className="image-sent" src={messageContent.message} alt="sent"/>}</p>
                   </div>
                 </div>
               </div>
