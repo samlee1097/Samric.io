@@ -14,6 +14,13 @@ const io = new Server(server, {
   },
 });
 
+app.get('/', (req, res) => {
+  res
+      .json({ message: 'Welcome' })
+      .status(200)
+      .end()
+});
+
 let userList={};
 
 io.on("connection", (socket) => {
