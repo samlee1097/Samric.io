@@ -54,7 +54,7 @@ $ npm install && npm start --prefix client
 
 ### Data Structure
 
-![image](https://user-images.githubusercontent.com/87099910/146803758-403c8613-5465-4614-b26b-b6554b1554a0.png)
+![image](https://user-images.githubusercontent.com/87099910/154176789-13a72a4e-0126-4805-a536-cde738b98cef.png)
 
 ### Component Hierarcy
 
