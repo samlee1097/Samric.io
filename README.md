@@ -10,7 +10,7 @@
 
 ## Live Link
 
-https://optimum-project.herokuapp.com/
+https://sketch-io.vercel.app/
 
 <a name="general-info"/>
 
@@ -42,7 +42,7 @@ Live multiplayer drawing and chat app where users can join private rooms, intera
 Start by **forking** the project template repository and then clone the project:
 
 ```console
-$ git clone git@github.com:samlee1097/Samric.io.git
+$ git clone git@github.com:samlee1097/Sketch.io.git
 $ cd Samric.io
 $ npm install && npm start --prefix server
 $ npm install && npm start --prefix client
