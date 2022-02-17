@@ -29,6 +29,12 @@ function GameRoom({socket, setRoom, userList}) {
         socketId: socket.id
     }
 
+    window.onbeforeunload = function()
+    {
+        socket.emit("user_leaves", userData);
+        return confirm("Confirm refresh");
+    };
+
     const [lastColor, setLastColor] = useState(utensil["color"]);    
 
     function handleUtensil(updateItem, keyHolder){
