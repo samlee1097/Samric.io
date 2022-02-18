@@ -33,7 +33,7 @@ io.on("connection", (socket) => {
     } else {
       userList[data.gameId].push(data);
     }
-    console.log(userList[data.gameId])
+ 
     io.to(data.gameId).emit('display_user', userList[data.gameId]);
   });
 
@@ -45,11 +45,20 @@ io.on("connection", (socket) => {
     socket.leave(data.gameId);
     userList[data.gameId] = userList[data.gameId]?.filter((user) => user.socketId !== socket.id);
 
-    console.log(userList[data.gameId])
     io.to(data.gameId).emit('display_user', userList[data.gameId]);
   })
 
+  let userDisconnectList;
+
+  socket.on("disconnecting", ()=> {
+    userDisconnectList = socket.rooms;
+  })
+
   socket.on("disconnect", () => {
+    const roomName = Array.from(userDisconnectList.keys())[1];
+    userList[roomName] = userList[roomName]?.filter((user) => user.socketId !== socket.id);
+
+    io.to(roomName).emit('display_user', userList[roomName]);
     console.log("User Disconnected", socket.id);
   });
 });

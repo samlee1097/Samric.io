@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-
 import ToolBox from './Canvas/ToolBox';
 import DrawingCanvas from './Canvas/DrawingCanvas'
 import ChatBox from './Chatbox/ChatBox';
@@ -28,12 +27,6 @@ function GameRoom({socket, setRoom, userList}) {
         gameId: gameId,
         socketId: socket.id
     }
-
-    window.onbeforeunload = function()
-    {
-        socket.emit("user_leaves", userData);
-        return confirm("Confirm refresh");
-    };
 
     const [lastColor, setLastColor] = useState(utensil["color"]);    
 
